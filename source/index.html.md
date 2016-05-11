@@ -6,10 +6,10 @@ language_tabs:
   - java
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
+  - <a href='mailto:support@opencabs.com'>Sign Up for a Developer Key</a>
 
 includes:
+  - lists
   - errors
 
 search: true
@@ -42,9 +42,311 @@ OpenCabs supports JSON by default for the body of the requests / responses. You 
 You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>your-publisher-id</code> with your personal values.
 </aside>
 
+# Bookings
+
+## Create a new booking
+
+`POST /book`
+
+This API enables to submit new bookings to the platform.
+
+Generally you will need to make a pricing request to obtain a <code>quoteId</code> before submitting your booking. This is not required however if you are a platform and have been authorised to post jobs with a price set by yourself.
+
+### Request
+
+> Example request
+
+```json
+{  
+   "quoteId":306007,
+   "isAsap":true,
+   "paymentTypeId":"cash",
+   "date":"2015-03-03T17:54:00Z",
+   "originPOI":"some poi",
+   "originAddressDetails":"12",
+   "originStreetNumber":"262",
+   "originAddress":"Kentish Town Road",
+   "originCity":"Greater London",
+   "originPostcode":"NW5 2AA",
+   "originLatitude":51.55051,
+   "originLongitude":-0.1407013000000461,
+   "originCountry":"GB",
+   "destinationPOI":"London Heathrow (Terminal 1)",
+   "destinationAddress":"Croydon Rd",
+   "destinationCity":"Hayes",
+   "destinationPostcode":"UB3 5AP",
+   "destinationLatitude":51.4723,
+   "destinationLongitude":-0.451795,
+   "destinationCountry":"UK",
+   "comments":"some notes",
+   "flightNumber":"AB12345",
+   "numPassengers":1,
+   "numSmallItems":0,
+   "numLargeItems":0,
+   "vehicleCategoryId":1,
+   "customer":{  
+      "customerId": 1234,
+      "firstName":"John",
+      "lastName":"Doe",
+      "phoneNumberCountryCode":"44",
+      "phoneNumber":"12345"
+   },
+   "forceAnonymousCustomer":0
+}
+```
+
+Key fields
+
+Name   | Required | Comments
+----------- | ----------- | -----------
+quoteId | (see comments) | The quoteId is required in all cases except if the publisher has been explicitly authorised (set up done by OpenCabs) for being able to post bookings without quoteId. In this case the <code>price</code> has to be included in the JSON with the request.
+customer | yes | The <code>customer</code> object is required. If the id matches an existing customer linked to the same details, then the booking will be linked to the existing customer profile; otherwise a new customer profile will be created. The <code>customer</code> needs to have at least: (i) firstName, (ii) phoneNumberCountryCode, (iii) phoneNumber.
+isAsap | yes | This field is used to tell the supplier to send a car as soon as they can, regardless of actual booking time. I.e. if the booking is for 20 minutes from now (which could be the contractual notice time agreed), if the supplier has a car available that can be sent immediately, then if <code>isAsap=true</code> the supplier knows that they have to send the car without waiting.
+flightNumber | <i>see comments</i> | Required for all pickups at airport terminals.
+
+### Response
+
+> Response
+
+```json
+{  
+    "id": 4098755,
+    "statusId": 1,
+    "customer": {
+        "customerId": 434665,
+        "firstName": "Moise",
+        "lastName": "Errol",
+        "phoneNumberCountryCode": "44",
+        "phoneNumber": "78812341234",
+        "vipScore": 0,
+        "noShowCount": 0,
+        "verified": false,
+        "enabled": false
+    },
+    "originStreetNumber": "",
+    "originAddressDetails": "",
+    "originAddress": "Westminster Bridge Road",
+    "originPOI": "St. Thomas' Hospital",
+    "originCity": "Lambeth",
+    "originCountry": "United Kingdom",
+    "originPostcode": "SE1 7HY",
+    "originLatitude": 51.4988,
+    "originLongitude": -0.117893,
+    "destinationStreetNumber": "22",
+    "destinationAddressDetails": "",
+    "destinationAddress": "Faircross Avenue",
+    "destinationPOI": "",
+    "destinationCity": "Barking",
+    "destinationCountry": "United Kingdom",
+    "destinationPostcode": "IG11 8RD",
+    "destinationLatitude": 51.542,
+    "destinationLongitude": 0.0831571,
+    "isAsap": true,
+    "date": "2016-05-11 17:05:00",
+    "timezoneOffset": 1,
+    "timeZone": "Europe/London",
+    "numLargeItems": 0,
+    "numSmallItems": 0,
+    "numPassengers": 2,
+    "journeyDistance": 18.843,
+    "journeyTimeMinutes": 40,
+    "comments": "",
+    "airportBooking": false,
+    "automaticallyAccepted": false,
+    "acknowledgedByCompany": false,
+    "bookingStops": [],
+    "fareType": "fixed_point_to_point",
+    "netPrice": 43.3,
+    "vat": 0,
+    "price": 43.3,
+    "discount": 0,
+    "totalCustomerPrice": 43.3,
+    "showPrice": true,
+    "currency": "GBP",
+    "currencyXml": {
+        "currencyId": "GBP",
+        "currencyLongSymbol": "GBP",
+        "currencyName": "Pound",
+        "currencySymbol": "£"
+    },
+    "publisher": {
+        "id": 1,
+        "shortName": "ABC Cabs",
+        "distance": 0,
+        "name": "ABC Cabs "
+    },
+    "paymentType": {
+        "id": "cash",
+        "shortDescription": "Cash",
+        "description": "Cash payment",
+        "isDefault": false
+    },
+    "vehicleCategory": {
+        "id": 1,
+        "rank": 11,
+        "defaultCategoryForCountry": true,
+        "capacityPassengers": 4,
+        "capacityLargeLuggage": 2,
+        "descriptionLong": "Saloon",
+        "descriptionShort": "Saloon",
+        "capacitySmallLuggage": 2,
+        "commonName": "standard_car",
+        "name": "Saloon",
+        "enabled": true
+    },
+    "managingCompany": {
+        "companyId": 8647,
+        "companyName": "East Ten Cars Limited",
+        "companyLatitude": 51.5144,
+        "companyLongitude": -0.0542385,
+        "orderPhone": "+442077771234"
+    },
+    "created": "2016-05-11 16:48:14",
+    "expiryDate": "2016-05-11 16:58:14"
+}
+```
+
+HTTP Code   | Description
+----------- | -----------
+201 | The booking has been successfully created.
+40x | The request has not been completed correctly: incorrect data passed, user not authorized, etc.
+50x | Server error
+
+## Get the details of a booking
+
+```json
+{
+    "id": 4098755,
+    "statusId": 1,
+    "automaticallyAccepted": false,
+    "customer": {
+        "customerId": 434665,
+        "firstName": "Moise",
+        "lastName": "Errol",
+        "phoneNumberCountryCode": "44",
+        "phoneNumber": "78812341234",
+        "vipScore": 0,
+        "noShowCount": 0,
+        "verified": false,
+        "enabled": false
+    },
+    "publisher": {
+        "id": 1,
+        "shortName": "ABC Cabs",
+        "distance": 0,
+        "name": "ABC Cabs "
+    },
+    "originStreetNumber": "",
+    "originAddressDetails": "",
+    "originAddress": "Westminster Bridge Road",
+    "originPOI": "St. Thomas' Hospital",
+    "originCity": "Lambeth",
+    "originCountry": "United Kingdom",
+    "originPostcode": "SE1 7HY",
+    "originLatitude": 51.4988,
+    "originLongitude": -0.117893,
+    "destinationStreetNumber": "92",
+    "destinationAddressDetails": "",
+    "destinationAddress": "Hillside Avenue",
+    "destinationPOI": "",
+    "destinationCity": "Barking",
+    "destinationCountry": "United Kingdom",
+    "destinationPostcode": "IG11 8RD",
+    "destinationLatitude": 51.542,
+    "destinationLongitude": 0.0831571,
+    "bookingStops": [
+    ],    
+    "isAsap": true,
+    "date": "2016-05-11 17:05:00",
+    "timezoneOffset": 1,
+    "timeZone": "Europe/London",
+    "numLargeItems": 0,
+    "numSmallItems": 0,
+    "numPassengers": 2,
+    "journeyDistance": 18.843,
+    "journeyTimeMinutes": 40,
+    "comments": "",
+    "airportBooking": false,
+    "fareType": "fixed_point_to_point",
+    "netPrice": 43.3,
+    "vat": 0,
+    "price": 43.3,
+    "discount": 0,
+    "totalCustomerPrice": 43.3,
+    "showPrice": true,
+    "currency": "GBP",
+    "currencyXml": {
+        "currencyId": "GBP",
+        "currencyLongSymbol": "GBP",
+        "currencyName": "Pound",
+        "currencySymbol": "£"
+    },
+    "paymentType": {
+        "id": "cash",
+        "shortDescription": "Cash",
+        "description": "Cash payment",
+        "isDefault": false
+    },
+    "vehicleCategory": {
+        "id": 1,
+        "rank": 11,
+        "defaultCategoryForCountry": true,
+        "capacityPassengers": 4,
+        "capacityLargeLuggage": 2,
+        "descriptionLong": "Saloon",
+        "descriptionShort": "Saloon",
+        "capacitySmallLuggage": 2,
+        "commonName": "standard_car",
+        "name": "Saloon",
+        "enabled": true
+    },
+    "created": "2016-05-11 16:48:14",
+    "expiryDate": "2016-05-11 16:58:14",
+    "acknowledgedByCompany": false
+}
+```
+
+`GET /bookings/{id}/details`
+
+HTTP Code   | Description
+----------- | -----------
+200 | Ok. The details of the booking are returned in the body.
+40x | The server could not complete the request correctly for: user not authorized, booking not found, etc.
+50x | Server error
+
+## Cancel a booking
+
+`POST /bookings/{id}/cancel`
+
+### Request
+
+```json
+{
+    "cancellationReason": "Flight cancelled."
+}
+```
+
+The cancellation API accepts a body with a single text field <code>cancellationReason</code>containing the reason of the cancellation.
+
+### Response
+
+```json
+{
+    "text": "The booking has been cancelled"
+}
+```
+
+HTTP Code   | Description
+----------- | -----------
+200 | Ok. The booking has been cancelled.
+40x | The server could not complete the request correctly for: user not authorized, booking not found, etc.
+50x | Server error
+
 # Pricing
 
 ## Get the price for a journey
+
+`POST /pricing/estimate`
 
 The quote API enables the client to obtain either:
 
@@ -52,9 +354,7 @@ The quote API enables the client to obtain either:
 
  - or the pricing structure: for a journey that has a metered fare.
 
-### HTTP Request
-
-> Example request
+### Request
 
 ```json
 {  
@@ -91,10 +391,6 @@ The quote API enables the client to obtain either:
    }  
  }
 ```
-
-`POST /pricing/estimate`
-
-### Request body
 
 The JSON request example shows the fields required for the pricing estimate.
 
@@ -199,253 +495,142 @@ The response contains the details of the journey with the price, with:
 
 - The `origin` fields and `destination` fields (if a destination is required) need to have <u>at least</u>: latitude, longitude, city and (i) POI or (ii) street address with either the streetNumber or the addressDetails;
 
-# Bookings
-
-## Create a new booking
-
-This API enables to submit new bookings to the platform.
-
-Generally you will need to make a pricing request to obtain a <code>quoteId</code> before submitting your booking. This is not required however if you are a platform and have been authorised to post jobs with a price set by yourself.
-
-### Request
-
-> Example request
-
-```json
-{  
-   "quoteId":306007,
-   "isAsap":true,
-   "paymentTypeId":"cash",
-   "date":"2015-03-03T17:54:00Z",
-   "originPOI":"some poi",
-   "originAddressDetails":"12",
-   "originStreetNumber":"262",
-   "originAddress":"Kentish Town Road",
-   "originCity":"Greater London",
-   "originPostcode":"NW5 2AA",
-   "originLatitude":51.55051,
-   "originLongitude":-0.1407013000000461,
-   "originCountry":"GB",
-   "destinationPOI":"London Heathrow (Terminal 1)",
-   "destinationAddress":"Croydon Rd",
-   "destinationCity":"Hayes",
-   "destinationPostcode":"UB3 5AP",
-   "destinationLatitude":51.4723,
-   "destinationLongitude":-0.451795,
-   "destinationCountry":"UK",
-   "comments":"some notes",
-   "flightNumber":"AB12345",
-   "numPassengers":1,
-   "numSmallItems":0,
-   "numLargeItems":0,
-   "vehicleCategoryId":1,
-   "customer":{  
-      "customerId": 1234,
-      "firstName":"John",
-      "lastName":"Doe",
-      "phoneNumberCountryCode":"44",
-      "phoneNumber":"12345"
-   },
-   "forceAnonymousCustomer":0
-}
-```
-
-`POST /book`
-
-Key fields
-
-Name   | Required | Comments
------------ | ----------- | -----------
-quoteId | (see comments) | The quoteId is required in all cases except if the publisher has been explicitly authorised (set up done by OpenCabs) for being able to post bookings without quoteId. In this case the <code>price</code> has to be included in the JSON with the request.
-customer | yes | The <code>customer</code> object is required. If the id matches an existing customer linked to the same details, then the booking will be linked to the existing customer profile; otherwise a new customer profile will be created. The <code>customer</code> needs to have at least: (i) firstName, (ii) phoneNumberCountryCode, (iii) phoneNumber.
-isAsap | yes | This field is used to tell the supplier to send a car as soon as they can, regardless of actual booking time. I.e. if the booking is for 20 minutes from now (which could be the contractual notice time agreed), if the supplier has a car available that can be sent immediately, then if <code>isAsap=true</code> the supplier knows that they have to send the car without waiting.
-flightNumber | <i>see comments</i> | Required for all pickups at airport terminals.
-
-### Response
-
-> Response
-
-```json
-{  
-"booking":[  
-      {  
-         "id":306049,
-         "customer":{  
-            "customerId":3608,
-            "email":"",
-            "firstName":"John",
-            "lastName":"Doe",
-            "phoneNumber":"12345",
-            "phoneNumberCountryCode":"44",
-            "vipScore":0.0,
-            "noShowCount":0,
-            "verified":false,
-            "enabled":false
-         },
-         "loyaltyTokenUsed":false,
-         "typeId":38,
-         "created":"2015-03-03 12:19:46",
-         "paymentType":{  
-            "id":"cash",
-            "shortDescription":"Cash",
-            "description":"Cash payment"
-         },
-         "fareType":"fixed_point_to_point",
-         "vehicleCategory":{  
-            "id":1,
-            "defaultCategoryForCountry":true,
-            "capacityPassengers":4,
-            "capacityLargeLuggage":2,
-            "capacitySmallLuggage":2,
-            "name":"Saloon",
-            "enabled":true,
-         },
-         "isAsap":true,
-         "date":"2015-03-03 12:28:50",
-         "timeZone":"Europe/London",
-         "timezoneOffset":0.0,
-         "statusId":0,
-         "originPOI":"some poi",
-         "originStreetNumber":"262",
-         "originAddressDetails":"12",
-         "originAddress":"Kentish Town Road",
-         "originCity":"Greater London",
-         "originCountry":"GB",
-         "originPostcode":"NW5 2AA",
-         "originLatitude":51.55051,
-         "originLongitude":-0.1407013,
-         "destinationPOI":"London Heathrow (Terminal 1)",
-         "destinationAddress":"Croydon Rd",
-         "destinationPostcode":"UB3 5AP",
-         "destinationCity":"Hayes",
-         "destinationCountry":"UK",
-         "destinationLatitude":51.4723,
-         "destinationLongitude":-0.451795,
-         "journeyDistance":31.766,
-         "journeyTimeMinutes":38,
-         "comments":"some notes",
-         "flightNumber":"AB12345",
-         "netPrice":32.08,
-         "vat":6.42,
-         "price":38.50,
-         "currency":"GBP",
-         "totalCustomerPrice":38.50,
-         "numPassengers":1,
-         "numLargeItems":0,
-         "numSmallItems":0,
-         "bookingStops":[  
-         ]
-      }
-   ]
-}
-```
-
-HTTP Code   | Description
------------ | -----------
-201 | The booking has been successfully created.
-40x | The request has not been completed correctly: incorrect data passed, user not authorized, etc.
-50x | Server error
-
-## Get the details of a booking
-
-## Cancel a booking
-
 # Tracking
 
-## Get the drivers online
+## Get the drivers in a defined zone
+
+`GET /tracking/drivers/byBoundingBox`
+
+```json
+{
+  "vehicleOnRoad": [
+    {
+      "id": 185911,
+      "available": true,
+      "driverId": 800,
+      "latitude": 51.5598,
+      "longitude": -0.0989665,
+      "bearing": 254,
+      "speed": 0,
+      "vehicleCategory": {
+        "id": 3,
+        "rank": 30,
+        "commonName": "saloon",
+        "name": "Saloon",
+        "capacityPassengers": 6,
+        "capacityLargeLuggage": 4,
+        "capacitySmallLuggage": 2
+      }
+    },
+    {
+      "id": 185924,
+      "available": false,
+      "driverId": 127,
+      "latitude": 52.0152,
+      "longitude": -1.1985,
+      "bearing": 254,
+      "speed": 32.501,
+      "vehicleCategory": {
+        "id": 3,
+        "rank": 30,
+        "commonName": "mpv",
+        "name": "MPV",
+        "capacityPassengers": 6,
+        "capacityLargeLuggage": 4,
+        "capacitySmallLuggage": 2
+      }
+    }
+  ]
+}
+```
+
+Returns the list of available drivers within a geographic bounding box with information on:
+
+ - Current availability,
+
+ - Vehicle type currently in use,
+
+ - Bearing (direction) and speed of the vehicle (if available).
+
+### Query parameters
+
+Name | Type | Required | Description
+---- | ---- | -------- | -----------
+minLat | float | yes | Latitude of the bottom left corner of the geographic bounding box.
+minLng | float | yes | Longitude of the bottom left corner of the geographic bounding box.
+maxLat | float | yes | Latitude of the top right corner of the geographic bounding box.
+maxLng | float | yes | Longitude of the top right corner of the geographic bounding box.
 
 ## Get the details of a driver online
 
-# Kittens
-
-## Get All Kittens
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
+`GET /tracking/drivers/{driverId}/{vehicleOnRoadId}`
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
+{
+  "latitude": 51.5598,
+  "longitude": -0.0989642,
+  "speed": 22,
+  "bearing": 254,
+  "available": false,
+  "id": 185912,
+  "driverId": 800,
+  "vehicleCategory": {
+    "id": 3,
+    "capacityPassengers": 6,
+    "capacityLargeLuggage": 4,
+    "capacitySmallLuggage": 2,
+    "rank": 30,
+    "name": "MPV",
+    "commonName": "mpv"
   },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
+  "timeUntilNextBooking": 1030,
+  "company": {
+    "orderPhone": "+917760420703",
+    "id": 308,
+    "name": "CAB Co 1"
+  },
+  "currentBooking": {
+    "id": 392852,
+    "date": "2016-05-11 18:53:00",
+    "destination": {
+      "latitude": 51.4595,
+      "longitude": -0.44661
+    },
+    "origin": {
+      "latitude": 51.5598,
+      "longitude": -0.0989554
+    },
+    "duration": 61,
+    "distance": 35.716
+  },
+  "nextBooking": {
+    "id": 393249,
+    "date": "2016-05-12 12:00:00",
+    "destination": {
+      "latitude": 51.4704,
+      "longitude": -0.452056
+    },
+    "origin": {
+      "latitude": 51.531,
+      "longitude": -0.1237
+    },
+    "duration": 46,
+    "distance": 30.819
   }
-]
+}
 ```
 
-This endpoint retrieves all kittens.
+Returns additional information for a specific driver currently online.
 
-### HTTP Request
+### Path parameters
 
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+Name | Description
+---- | -----------
+driverId | The id of the connected driver.
+vehicleOnRoadId | The id of the current driving session for the driver (every time a driver logs in, a new number is generated).
 
 <aside class="success">
 Remember — a happy kitten is an authenticated kitten!
 </aside>
 
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
 <aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
