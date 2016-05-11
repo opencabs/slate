@@ -1,9 +1,8 @@
 ---
-title: API Reference
+title: OpenCabs API Reference
 
 language_tabs:
   - shell
-  - java
 
 toc_footers:
   - <a href='mailto:support@opencabs.com'>Sign Up for a Developer Key</a>
