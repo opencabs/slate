@@ -208,7 +208,7 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 <tr>
 <td>quoteId</td>
 <td>(see comments)</td>
-<td>The quoteId is required in all cases except if the publisher has been explicitly authorised (set up done by OpenCabs) for being able to post bookings without <code>quoteId</code>.<br>In this case the <code>price</code> has to be included in the JSON with the request (e.g. <code class="prettyprint">&quot;price&quot;: 23.50</code>).</td>
+<td>The quoteId is required in all cases except if the publisher has been explicitly authorised (set up done by OpenCabs) for being able to post bookings without <code>quoteId</code>.<br>In this case the <code>price</code> has to be included in the JSON with the request, as well as the id of the company to which the booking is allocated, e.g.<br><code class="prettyprint">&quot;price&quot;: 23.50</code><br><code class="prettyprint">&quot;managingCompanyId&quot;: 308</code></td>
 </tr>
 <tr>
 <td>customer</td>
@@ -881,18 +881,141 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 </tr>
 </tbody></table>
 
-<aside class="success">
-For any questions, please contact us at: support@opencabs.com
-</aside>
+<h2 id="track-the-driver-of-a-booking">Track the driver of a booking</h2>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.1559</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.158816</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"locationAccuracy"</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"distanceFromPickup"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.41327956</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"vehicleOnRoadId"</span><span class="p">:</span><span class="w"> </span><span class="mi">945422</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"vehicleOnRoadDeviceTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1463007423000</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"locationAgeInMillis"</span><span class="p">:</span><span class="w"> </span><span class="mi">24607</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">GET /bookings/{bookingId}/tracking</code></p>
+
+<p>Returns the current position of the driver of a booking.</p>
+
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>Ok. The current position of the driver is returned in the body.</td>
+</tr>
+<tr>
+<td>40x</td>
+<td>The server could not complete the request correctly for: user not authorized, booking not found, booking not currently in execution, driver not connected etc.</td>
+</tr>
+<tr>
+<td>50x</td>
+<td>Server error</td>
+</tr>
+</tbody></table>
 
           <h1 id="appendices">Appendices</h1>
 
+<h2 id="bookings">Bookings</h2>
+
+<h3 id="statuses">Statuses</h3>
+
+<table><thead>
+<tr>
+<th>Id</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>0</td>
+<td>BOOKING_STATUS_NEW</td>
+</tr>
+<tr>
+<td>1</td>
+<td>BOOKING_STATUS_BOOKED</td>
+</tr>
+<tr>
+<td>2</td>
+<td>BOOKING_STATUS_IN_EXECUTION</td>
+</tr>
+<tr>
+<td>3</td>
+<td>BOOKING_STATUS_EXECUTED</td>
+</tr>
+<tr>
+<td>4</td>
+<td>BOOKING_STATUS_CANCELLED_BY_USER</td>
+</tr>
+<tr>
+<td>44</td>
+<td>BOOKING_STATUS_CANCELLED_BY_ACCOUNT</td>
+</tr>
+<tr>
+<td>45</td>
+<td>BOOKING_STATUS_CANCELLED_BY_COMPANY</td>
+</tr>
+<tr>
+<td>46</td>
+<td>BOOKING_STATUS_CANCELLED_BY_ADMIN</td>
+</tr>
+<tr>
+<td>5</td>
+<td>BOOKING_STATUS_EXPIRED</td>
+</tr>
+<tr>
+<td>6</td>
+<td>BOOKING_STATUS_BILLED</td>
+</tr>
+<tr>
+<td>71</td>
+<td>BOOKING_STATUS_REFUNDED_BY_COMPANY</td>
+</tr>
+<tr>
+<td>72</td>
+<td>BOOKING_STATUS_REFUNDED_BY_ADMIN</td>
+</tr>
+<tr>
+<td>73</td>
+<td>BOOKING_STATUS_REFUND_REQUESTED_BY_COMPANY</td>
+</tr>
+<tr>
+<td>74</td>
+<td>BOOKING_STATUS_REFUND_CANCELLED_BY_ADMIN</td>
+</tr>
+</tbody></table>
+
 <h2 id="fare-types">Fare types</h2>
 
-<p>Id | Description
-fixed_point_to_point | Fixed fare for standard A to B journey or transfer
-metered | Metered fare (in development)
-as_directed | As Directed - pickup and duration of service (in development)</p>
+<table><thead>
+<tr>
+<th>Id</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>fixed_point_to_point</td>
+<td>Fixed fare for standard A to B journey or transfer</td>
+</tr>
+<tr>
+<td>metered</td>
+<td>Metered fare (in development)</td>
+</tr>
+<tr>
+<td>as_directed</td>
+<td>As Directed - pickup and duration of service (in development)</td>
+</tr>
+</tbody></table>
 
 <h2 id="payment-types">Payment types</h2>
 
