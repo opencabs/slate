@@ -91,7 +91,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;java&quot;,&quot;ruby&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;java&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -103,8 +103,6 @@
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="java">java</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -160,10 +158,6 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET ../pricing/estimate</code></p>
-
-<h3 id="request-body">Request body</h3>
-
 <blockquote>
 <p>Example request</p>
 </blockquote>
@@ -202,6 +196,10 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
  </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
+<p><code class="prettyprint">POST /pricing/estimate</code></p>
+
+<h3 id="request-body">Request body</h3>
+
 <p>The JSON request example shows the fields required for the pricing estimate.</p>
 
 <p>The destination fields are generally not required for requests with &#39;metered&rsquo; fare type.</p>
@@ -212,7 +210,6 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 <tr>
 <th>Parameter</th>
 <th>Required</th>
-<th>Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -220,33 +217,29 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 <td>isAsap</td>
 <td>yes</td>
 <td>If set to true, the result will also include cats</td>
-<td></td>
 </tr>
 <tr>
 <td>date</td>
 <td>yes</td>
 <td>In local time with the format yyyy-mm-dd’T’hh:mm:ss’Z’</td>
-<td></td>
 </tr>
 <tr>
 <td>fareTypeId</td>
 <td>yes</td>
 <td>Possible values: fixed_point_to_point, metered, as_directed (not implemented yet)</td>
-<td></td>
 </tr>
 <tr>
 <td>flightNumber</td>
 <td>yes, for airport pickups</td>
 <td>Flight number (e.g. BA123) which will enable suppliers to monitor flights for delays and cancellations</td>
-<td></td>
 </tr>
 </tbody></table>
+
+<h3 id="response">Response</h3>
 
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-
-<h3 id="response">Response</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">  
    </span><span class="nt">"quoteId"</span><span class="p">:</span><span class="mi">306007</span><span class="p">,</span><span class="w">
    </span><span class="nt">"price"</span><span class="p">:{</span><span class="w">  
@@ -282,23 +275,16 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
       </span><span class="nt">"originStreetNumber"</span><span class="p">:</span><span class="s2">"262"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"originAddressDetails"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"timezoneOffset"</span><span class="p">:</span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"minPrice"</span><span class="p">:</span><span class="mf">38.50</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"maxPrice"</span><span class="p">:</span><span class="mf">38.50</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="mf">38.50</span><span class="p">,</span><span class="w">
       </span><span class="nt">"netPrice"</span><span class="p">:</span><span class="mf">32.08</span><span class="p">,</span><span class="w">
       </span><span class="nt">"vat"</span><span class="p">:</span><span class="mf">6.42</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"minPriceNet"</span><span class="p">:</span><span class="mf">32.08</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"minPriceVat"</span><span class="p">:</span><span class="mf">6.42</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"maxPriceNet"</span><span class="p">:</span><span class="mf">32.08</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"maxPriceVat"</span><span class="p">:</span><span class="mf">6.42</span><span class="p">,</span><span class="w">
       </span><span class="nt">"numLargeItems"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nt">"numSmallItems"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nt">"totalCustomerPrice"</span><span class="p">:</span><span class="mf">38.50</span><span class="p">,</span><span class="w">
       </span><span class="nt">"timeZone"</span><span class="p">:</span><span class="s2">"Europe/London"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"date"</span><span class="p">:</span><span class="s2">"2015-03-03 12:28:50"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"bookingStops"</span><span class="p">:[</span><span class="w">  
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"price"</span><span class="p">:</span><span class="mf">38.50</span><span class="w">
+      </span><span class="p">]</span><span class="w">
    </span><span class="p">},</span><span class="w">
    </span><span class="nt">"availablePaymentTypes"</span><span class="p">:[</span><span class="w">  
       </span><span class="p">{</span><span class="w">  
@@ -317,24 +303,236 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
          </span><span class="nt">"description"</span><span class="p">:</span><span class="s2">"Cash payment"</span><span class="w">
       </span><span class="p">}</span><span class="w">
    </span><span class="p">],</span><span class="w">
-   </span><span class="nt">"showPrice"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"expiryDate"</span><span class="p">:</span><span class="s2">""</span><span class="w">
+   </span><span class="nt">"showPrice"</span><span class="p">:</span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+
+<table><thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>The request has been completed correctly. Check the content to know if a price is actually available (see further).</td>
+</tr>
+<tr>
+<td>40x</td>
+<td>The request has not been completed correctly. Some of the reasons are: incorrect data passed, user not authorized, etc.</td>
+</tr>
+<tr>
+<td>50x</td>
+<td>Server error</td>
+</tr>
+</tbody></table>
+
+<p>The response contains the details of the journey with the price, with:</p>
+
+<ul>
+<li><p><code>quoteId</code>: if this is available and not null, then a price has been obtained. Otherwise check the <code>responseCode</code> and <code>text</code> fields for more information.</p></li>
+<li><p><code>price</code> object contains the quoted price for a journey with fixed price. If the</p></li>
+<li><p><code>meteredPricingStructure</code> object (not available in the example) contains the pricing structure for a metered journey;</p></li>
+<li><p><code>availablePaymentTypes</code>: the list of the payment types that are acceptable for booking the journey;</p></li>
+<li><p>The <code class="prettyprint">origin</code> fields and <code class="prettyprint">destination</code> fields (if a destination is required) need to have <u>at least</u>: latitude, longitude, city and (i) POI or (ii) street address with either the streetNumber or the addressDetails;</p></li>
+</ul>
+
+<h1 id="bookings">Bookings</h1>
+
+<h2 id="create-a-new-booking">Create a new booking</h2>
+
+<p>This API enables to submit new bookings to the platform.</p>
+
+<p>Generally you will need to make a pricing request to obtain a <code>quoteId</code> before submitting your booking. This is not required however if you are a platform and have been authorised to post jobs with a price set by yourself.</p>
+
+<h3 id="request">Request</h3>
+
+<blockquote>
+<p>Example request</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">  
+   </span><span class="nt">"quoteId"</span><span class="p">:</span><span class="mi">306007</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"isAsap"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"paymentTypeId"</span><span class="p">:</span><span class="s2">"cash"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"date"</span><span class="p">:</span><span class="s2">"2015-03-03T17:54:00Z"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"originPOI"</span><span class="p">:</span><span class="s2">"some poi"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"originAddressDetails"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"originStreetNumber"</span><span class="p">:</span><span class="s2">"262"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"originAddress"</span><span class="p">:</span><span class="s2">"Kentish Town Road"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"originCity"</span><span class="p">:</span><span class="s2">"Greater London"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"originPostcode"</span><span class="p">:</span><span class="s2">"NW5 2AA"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"originLatitude"</span><span class="p">:</span><span class="mf">51.55051</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"originLongitude"</span><span class="p">:</span><span class="mf">-0.1407013000000461</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"originCountry"</span><span class="p">:</span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"destinationPOI"</span><span class="p">:</span><span class="s2">"London Heathrow (Terminal 1)"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"destinationAddress"</span><span class="p">:</span><span class="s2">"Croydon Rd"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"destinationCity"</span><span class="p">:</span><span class="s2">"Hayes"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"destinationPostcode"</span><span class="p">:</span><span class="s2">"UB3 5AP"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"destinationLatitude"</span><span class="p">:</span><span class="mf">51.4723</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"destinationLongitude"</span><span class="p">:</span><span class="mf">-0.451795</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"destinationCountry"</span><span class="p">:</span><span class="s2">"UK"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"comments"</span><span class="p">:</span><span class="s2">"some notes"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"flightNumber"</span><span class="p">:</span><span class="s2">"AB12345"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"numPassengers"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"numSmallItems"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"numLargeItems"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"vehicleCategoryId"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"customer"</span><span class="p">:{</span><span class="w">  
+      </span><span class="nt">"customerId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"firstName"</span><span class="p">:</span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"lastName"</span><span class="p">:</span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"phoneNumberCountryCode"</span><span class="p">:</span><span class="s2">"44"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"phoneNumber"</span><span class="p">:</span><span class="s2">"12345"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"forceAnonymousCustomer"</span><span class="p">:</span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">POST /book</code></p>
+
+<p>Key fields</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>quoteId</td>
+<td>(see comments)</td>
+<td>The quoteId is required in all cases except if the publisher has been explicitly authorised (set up done by OpenCabs) for being able to post bookings without quoteId. In this case the <code>price</code> has to be included in the JSON with the request.</td>
+</tr>
+<tr>
+<td>customer</td>
+<td>yes</td>
+<td>The <code>customer</code> object is required. If the id matches an existing customer linked to the same details, then the booking will be linked to the existing customer profile; otherwise a new customer profile will be created. The <code>customer</code> needs to have at least: (i) firstName, (ii) phoneNumberCountryCode, (iii) phoneNumber.</td>
+</tr>
+<tr>
+<td>isAsap</td>
+<td>yes</td>
+<td>This field is used to tell the supplier to send a car as soon as they can, regardless of actual booking time. I.e. if the booking is for 20 minutes from now (which could be the contractual notice time agreed), if the supplier has a car available that can be sent immediately, then if <code>isAsap=true</code> the supplier knows that they have to send the car without waiting.</td>
+</tr>
+<tr>
+<td>flightNumber</td>
+<td><i>see comments</i></td>
+<td>Required for all pickups at airport terminals.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">  
+</span><span class="nt">"booking"</span><span class="p">:[</span><span class="w">  
+      </span><span class="p">{</span><span class="w">  
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">306049</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"customer"</span><span class="p">:{</span><span class="w">  
+            </span><span class="nt">"customerId"</span><span class="p">:</span><span class="mi">3608</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"firstName"</span><span class="p">:</span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"lastName"</span><span class="p">:</span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"phoneNumber"</span><span class="p">:</span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"phoneNumberCountryCode"</span><span class="p">:</span><span class="s2">"44"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"vipScore"</span><span class="p">:</span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"noShowCount"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"verified"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"enabled"</span><span class="p">:</span><span class="kc">false</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nt">"loyaltyTokenUsed"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"typeId"</span><span class="p">:</span><span class="mi">38</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"created"</span><span class="p">:</span><span class="s2">"2015-03-03 12:19:46"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"paymentType"</span><span class="p">:{</span><span class="w">  
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"cash"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"shortDescription"</span><span class="p">:</span><span class="s2">"Cash"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"description"</span><span class="p">:</span><span class="s2">"Cash payment"</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nt">"fareType"</span><span class="p">:</span><span class="s2">"fixed_point_to_point"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"vehicleCategory"</span><span class="p">:{</span><span class="w">  
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"defaultCategoryForCountry"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"capacityPassengers"</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"capacityLargeLuggage"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"capacitySmallLuggage"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"Saloon"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"enabled"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+         </span><span class="err">}</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"isAsap"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"date"</span><span class="p">:</span><span class="s2">"2015-03-03 12:28:50"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"timeZone"</span><span class="p">:</span><span class="s2">"Europe/London"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"timezoneOffset"</span><span class="p">:</span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"statusId"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"originPOI"</span><span class="p">:</span><span class="s2">"some poi"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"originStreetNumber"</span><span class="p">:</span><span class="s2">"262"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"originAddressDetails"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"originAddress"</span><span class="p">:</span><span class="s2">"Kentish Town Road"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"originCity"</span><span class="p">:</span><span class="s2">"Greater London"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"originCountry"</span><span class="p">:</span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"originPostcode"</span><span class="p">:</span><span class="s2">"NW5 2AA"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"originLatitude"</span><span class="p">:</span><span class="mf">51.55051</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"originLongitude"</span><span class="p">:</span><span class="mf">-0.1407013</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"destinationPOI"</span><span class="p">:</span><span class="s2">"London Heathrow (Terminal 1)"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"destinationAddress"</span><span class="p">:</span><span class="s2">"Croydon Rd"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"destinationPostcode"</span><span class="p">:</span><span class="s2">"UB3 5AP"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"destinationCity"</span><span class="p">:</span><span class="s2">"Hayes"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"destinationCountry"</span><span class="p">:</span><span class="s2">"UK"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"destinationLatitude"</span><span class="p">:</span><span class="mf">51.4723</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"destinationLongitude"</span><span class="p">:</span><span class="mf">-0.451795</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"journeyDistance"</span><span class="p">:</span><span class="mf">31.766</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"journeyTimeMinutes"</span><span class="p">:</span><span class="mi">38</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"comments"</span><span class="p">:</span><span class="s2">"some notes"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"flightNumber"</span><span class="p">:</span><span class="s2">"AB12345"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"netPrice"</span><span class="p">:</span><span class="mf">32.08</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"vat"</span><span class="p">:</span><span class="mf">6.42</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"price"</span><span class="p">:</span><span class="mf">38.50</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"currency"</span><span class="p">:</span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"totalCustomerPrice"</span><span class="p">:</span><span class="mf">38.50</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"numPassengers"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"numLargeItems"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"numSmallItems"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"bookingStops"</span><span class="p">:[</span><span class="w">  
+         </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>201</td>
+<td>The booking has been successfully created.</td>
+</tr>
+<tr>
+<td>40x</td>
+<td>The request has not been completed correctly: incorrect data passed, user not authorized, etc.</td>
+</tr>
+<tr>
+<td>50x</td>
+<td>Server error</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-the-details-of-a-booking">Get the details of a booking</h2>
+
+<h2 id="cancel-a-booking">Cancel a booking</h2>
+
+<h1 id="tracking">Tracking</h1>
+
+<h2 id="get-the-drivers-online">Get the drivers online</h2>
+
+<h2 id="get-the-details-of-a-driver-online">Get the details of a driver online</h2>
 
 <h1 id="kittens">Kittens</h1>
 
 <h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre>
 <pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
   -H <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre>
@@ -503,8 +701,6 @@ Remember — a happy kitten is an authenticated kitten!
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
                 <a href="#" data-language-name="java">java</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
           </div>
       </div>
     </div>
