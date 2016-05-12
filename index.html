@@ -687,6 +687,42 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 <td><code class="prettyprint">coverageFound</code></td>
 <td><i>true</i>: online booking are expected to be available. The user flow can continue.<br><i>false</i>: the location is not covered and a user message should be displayed.</td>
 </tr>
+<tr>
+<td><code class="prettyprint">hailingEnabled</code></td>
+<td><i>true</i>: there are drivers currently online and available to accept bookings.<i>false</i>: bookings sent directly to drivers are not possible as there are no drivers online at the moment. Note: bookings could be possible via the cab offices, with potentially only a few additional minutes for the ETA to pickup.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">preBookingEnabled</code></td>
+<td><i>true</i>: advance bookings (via the cab office who will then dispatch the jobs to the drivers) are possible.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">defaultMinutesForEta</code></td>
+<td>???.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">fareTypeHailing</code></td>
+<td>(for hailing) <i>Array</i> with the list of fare allowed fare types for a hailing request. When making the pricing request, use the first fare type with the field <code class="prettyprint">isDefault=true</code> (or simply the first fare type if there are no <i>default</i> fare types).<br>Use the <code class="prettyprint">requireDestination</code> property to know if you need to ask the destination to the user in the UI or whether the destination is optional and you can proceed without it.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">vehicleCategoryHailing</code></td>
+<td>(for hailing) <i>Array</i> with the list of vehicle categories available for hailing in the selected location.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">vehicleOnRoad</code></td>
+<td>(for hailing) <i>Array</i> with the list of drivers currently online and close to the selected location. You can use this information to display the position of the current drivers or (preferred option) call the <code class="prettyprint">/tracking/liveDrivers/xxx</code> service (<i>to be documented</i>).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">fareType</code></td>
+<td>(for pre-bookings) <i>Array</i> with the list of fare allowed fare types for a pre-booking request. When making the pricing request, use the first fare type with the field <code class="prettyprint">isDefault=true</code> (or simply the first fare type if there are no default fare types).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">vehicleCategory</code></td>
+<td>(for pre-bookings) <i>Array</i> with the list of vehicle categories available for pre-booking in the selected location.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">displayBookingCentre</code></td>
+<td>When <code class="prettyprint">coverageFound=false</code> then some apps offer the option to call an operator to assist the customer. This field tell the user app if the &lsquo;call center operator&rsquo; option is available. If yes, an object <code class="prettyprint">bookingCentre</code> will appear in the response and will provide the call center information.</td>
+</tr>
 </tbody></table>
 
           <h1 id="pricing">Pricing</h1>
@@ -700,7 +736,7 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
    </span><span class="nt">"isAsap"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">  
    </span><span class="nt">"date"</span><span class="p">:</span><span class="s2">"2015-03-03T17:54:00Z"</span><span class="p">,</span><span class="w">  
    </span><span class="nt">"fareTypeId"</span><span class="p">:</span><span class="s2">"fixed_point_to_point"</span><span class="p">,</span><span class="w">  
-   </span><span class="nt">"originPOI"</span><span class="p">:</span><span class="s2">"some poi"</span><span class="p">,</span><span class="w">  
+   </span><span class="nt">"originPOI"</span><span class="p">:</span><span class="s2">"some poi"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"originAddressDetails"</span><span class="p">:</span><span class="s2">"York House"</span><span class="p">,</span><span class="w">  
    </span><span class="nt">"originStreetNumber"</span><span class="p">:</span><span class="s2">"262"</span><span class="p">,</span><span class="w">  
    </span><span class="nt">"originAddress"</span><span class="p">:</span><span class="s2">"Kentish Town Road"</span><span class="p">,</span><span class="w">  
@@ -731,14 +767,14 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
  </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p><code class="prettyprint">POST /pricing/estimate</code></p>
-
 <p>The quote API enables the client to obtain either:</p>
 
 <ul>
 <li><p>a price: for fixed price journeys,</p></li>
 <li><p>or the pricing structure: for a journey that has a metered fare.</p></li>
 </ul>
+
+<p><code class="prettyprint">POST /pricing/estimate</code></p>
 
 <h3 id="request">Request</h3>
 
