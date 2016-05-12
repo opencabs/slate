@@ -515,6 +515,180 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 </tr>
 </tbody></table>
 
+          <h1 id="coverage">Coverage</h1>
+
+<h2 id="get-the-available-services">Get the available services</h2>
+
+<p>This services is used to test which services area available in a given location, so that you can display the correct UI to the user.</p>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"coverageFound"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"hailingEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"preBookingEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"defaultMinutesForEta"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"displayBookingCentre"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fareTypeHailing"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"requireDestination"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"metered"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"metered fare"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"isDefault"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"vehicleCategoryHailing"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"capacityPassengers"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"capacityLargeLuggage"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"capacitySmallLuggage"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"commonName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mpv"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MPV"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"capacityPassengers"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"capacityLargeLuggage"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"capacitySmallLuggage"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"commonName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"standard_car"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Locomote"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"vehicleOnRoad"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"vehicleOnRoadId"</span><span class="p">:</span><span class="w"> </span><span class="mi">185952</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.1598</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.1989709</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"locationAccuracy"</span><span class="p">:</span><span class="w"> </span><span class="mf">30.521</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"vehicleOnRoadDeviceTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1463077414000</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"vehicleCategory"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"commonName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mpv"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">  
+  </span><span class="nt">"fareType"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"requireDestination"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fixed_point_to_point"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fixed fare - for journey (point to point)"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"isDefault"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"requireDestination"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"metered"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"metered fare"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"isDefault"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"vehicleCategory"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"requiredNoticeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"capacityPassengers"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"capacityLargeLuggage"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"capacitySmallLuggage"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"commonName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"standard_car"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Locomote"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"requiredNoticeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"capacityPassengers"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"capacityLargeLuggage"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"capacitySmallLuggage"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"commonName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"estate_car"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Loco X+"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">GET /coverage/forLocation/</code></p>
+
+<h3 id="query-parameters">Query parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">lat</code></td>
+<td>float</td>
+<td><b>Required</b>. Latitude of the location for which you need to know if online bookings are available.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">lng</code></td>
+<td>float</td>
+<td><b>Required</b>. Longitude of the location for which you need to know if online bookings are available.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">notice</code></td>
+<td>float</td>
+<td>Notice time, in minutes (i.e. &ldquo;are there any cars available for a pickup within 30 minutes?&rdquo;).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">toLat</code></td>
+<td>float</td>
+<td>Latitude of the destination of a journey, to know if a journey is covered. In some case only pre-defined routes are allowed from certain locations. Hence even if the coverage on the pickup only had returned that online bookings are available, in some cases it&rsquo;s useful to re-test this after the destination has been entered so that the user can be redirected to the correct UI before actually attempting to get a price and place a booking.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">toLng</code></td>
+<td>float</td>
+<td><i>(see above)</i></td>
+</tr>
+<tr>
+<td><code class="prettyprint">paymentTypeId</code></td>
+<td>string</td>
+<td>See the list of possible values on the <a href="#appendices">Appendices</a></td>
+</tr>
+<tr>
+<td><code class="prettyprint">fareTypeId</code></td>
+<td>string</td>
+<td>See the list of possible values on the <a href="#appendices">Appendices</a></td>
+</tr>
+<tr>
+<td><code class="prettyprint">vehicleCategoryId</code></td>
+<td>integer</td>
+<td>Id of the specific vehicle category for which we want to know if online bookings are available.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">forPreBooking</code></td>
+<td>boolean</td>
+<td><i>Default value=true</i></td>
+</tr>
+<tr>
+<td><code class="prettyprint">forHailing</code></td>
+<td>boolean</td>
+<td><i>Default value=false</i></td>
+</tr>
+</tbody></table>
+
+<h3 id="response-details">Response details</h3>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">coverageFound</code></td>
+<td><i>true</i>: online booking are expected to be available. The user flow can continue.<br><i>false</i>: the location is not covered and a user message should be displayed.</td>
+</tr>
+</tbody></table>
+
           <h1 id="pricing">Pricing</h1>
 
 <h2 id="get-the-price-for-a-journey">Get the price for a journey</h2>
