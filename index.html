@@ -132,12 +132,12 @@
 
 <p><code class="prettyprint">ApiKey: &lt;your-api-key&gt;</code><br>
 <code class="prettyprint">Token: &lt;your-token&gt;</code><br>
-<code class="prettyprint">ContextType”: &quot;publisher&quot;</code><br>
-<code class="prettyprint">ContextId”: &quot;&lt;your-publisher-id&gt;&quot;</code></p>
+<code class="prettyprint">ContextType: publisher</code><br>
+<code class="prettyprint">ContextId: &lt;your-publisher-id&gt;</code></p>
 
 <p>OpenCabs supports JSON by default for the body of the requests / responses. You need to specify this in the headers with:</p>
 
-<p><code class="prettyprint">Content-Type”: “application/json&quot;</code></p>
+<p><code class="prettyprint">Content-Type: application/json</code></p>
 
 <aside class="notice">
 You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>your-publisher-id</code> with your personal values.
@@ -491,7 +491,7 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 
 <h3 id="request">Request</h3>
 
-<p>The cancellation API accepts a body with a single text field <code>cancellationReason</code> containing the reason of the cancellation.</p>
+<p>The cancellation API accepts a body with a single text field <code>cancellationReason</code> containing the reason of the cancellation. This field can be empty.</p>
 
 <h3 id="response">Response</h3>
 
@@ -1246,6 +1246,84 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 <tr>
 <td>on_account</td>
 <td>Account payment, i.e. deferred payment after invoice</td>
+</tr>
+</tbody></table>
+
+<h2 id="vehicle-categories">Vehicle categories</h2>
+
+<table><thead>
+<tr>
+<th>Country</th>
+<th>Id</th>
+<th>Pax</th>
+<th>Bags-L</th>
+<th>Bags-S</th>
+<th>Name</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>UK</td>
+<td><strong>1</strong></td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td><strong>Saloon</strong> (Prius)</td>
+</tr>
+<tr>
+<td>UK</td>
+<td><strong>2</strong></td>
+<td>4</td>
+<td>4</td>
+<td>2</td>
+<td><strong>Estate</strong> (Prius+)</td>
+</tr>
+<tr>
+<td>UK</td>
+<td><strong>3</strong></td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td><strong>Small MPV</strong> (Zafira)</td>
+</tr>
+<tr>
+<td>UK</td>
+<td><strong>4</strong></td>
+<td>6</td>
+<td>4</td>
+<td>3</td>
+<td><strong>Large MPV</strong> (Galaxy, 6 pax + hand luggage or 5 pax + bags</td>
+</tr>
+<tr>
+<td>UK</td>
+<td><strong>11</strong></td>
+<td>8</td>
+<td>2</td>
+<td>2</td>
+<td><strong>8 seaters</strong> (Transporter)</td>
+</tr>
+<tr>
+<td>UK</td>
+<td><strong>6</strong></td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td><strong>Executive Saloon</strong> (E-Class)</td>
+</tr>
+<tr>
+<td>UK</td>
+<td><strong>634</strong></td>
+<td>6</td>
+<td>6</td>
+<td>3</td>
+<td><strong>Executive MPV</strong> (V-Class)</td>
+</tr>
+<tr>
+<td>UK</td>
+<td><strong>49</strong></td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td><strong>Luxury Saloon</strong> (S-Class)</td>
 </tr>
 </tbody></table>
 
