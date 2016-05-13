@@ -33,12 +33,12 @@ OpenCabs expects for the API key to be included in all API requests. You also ne
 
 `ApiKey: <your-api-key>`  
 `Token: <your-token>`  
-`ContextType”: "publisher"`  
-`ContextId”: "<your-publisher-id>"`
+`ContextType: publisher`  
+`ContextId: <your-publisher-id>`
 
 OpenCabs supports JSON by default for the body of the requests / responses. You need to specify this in the headers with:
 
-`Content-Type”: “application/json"`
+`Content-Type: application/json`
 
 <aside class="notice">
 You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>your-publisher-id</code> with your personal values.
