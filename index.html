@@ -1091,6 +1091,157 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 </tr>
 </tbody></table>
 
+<h2 id="get-the-drivers-for-job-request">Get the drivers for job request</h2>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"vehicleOnRoad"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">186452</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"bearing"</span><span class="p">:</span><span class="w"> </span><span class="mf">347.12</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.5596</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.0988429</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"driverId"</span><span class="p">:</span><span class="w"> </span><span class="mi">800</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"speed"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"vehicleCategory"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"commonName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mpv"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"currentBooking"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">394449</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-19 00:25:45"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.531</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.1237</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"distance"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.7</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"nextBooking"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">394349</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-19 05:00:00"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.5604</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.0988141</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"distance"</span><span class="p">:</span><span class="w"> </span><span class="mf">35.402</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">57</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"timeUntilNextBooking"</span><span class="p">:</span><span class="w"> </span><span class="mi">247</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.5309</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.117274</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"orderPhone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+447720700000"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">308</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CabCo 1"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"(more results"</span><span class="p">:</span><span class="w"> </span><span class="s2">"here)"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">GET /tracking/drivers/availableForImminentJob</code></p>
+
+<p>Returns the list of live drivers who are expected to be compatible with an &lsquo;imminent journey&rsquo; request (pickup in less than 90 minutes from now).</p>
+
+<h3 id="query-parameters">Query parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>date</td>
+<td>string</td>
+<td>yes</td>
+<td>Pickup date in local time at the format <code class="prettyprint">yyyy-MM-ddTHH:mm:ss</code> (e.g. &#39;2016-05-19T01:15:00&rsquo;)</td>
+</tr>
+<tr>
+<td>originLat</td>
+<td>float</td>
+<td>yes</td>
+<td>Latitude of the pickup location.</td>
+</tr>
+<tr>
+<td>originLng</td>
+<td>float</td>
+<td>yes</td>
+<td>Longitude of the pickup location.</td>
+</tr>
+<tr>
+<td>destinationLat</td>
+<td>float</td>
+<td>no</td>
+<td>Latitude of the destination.</td>
+</tr>
+<tr>
+<td>destinationLng</td>
+<td>float</td>
+<td>no</td>
+<td>Longitude of the destination.</td>
+</tr>
+<tr>
+<td>vehicleCategoryId</td>
+<td>float</td>
+<td>no</td>
+<td><code class="prettyprint">id</code> of the required vehicle category for the journey.</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>float</td>
+<td>yes</td>
+<td>Expected duration of the journey in minutes.</td>
+</tr>
+<tr>
+<td>searchRadius</td>
+<td>float</td>
+<td>no</td>
+<td>Maximum distance of the current driver location from the pickup of the journey (default=25).</td>
+</tr>
+<tr>
+<td>max</td>
+<td>float</td>
+<td>no</td>
+<td>Number of results to return (default=10).</td>
+</tr>
+</tbody></table>
+
+<p>Currently the system tests for time overlap between the (1) requested journey and (2.a) the current job of the driver (if any) and (2.b) the next allocated job to the driver (if any).</p>
+
+<p>Note: at this stage the system does not check whether the driver will materially have time to go from current location -&gt; destination of current job -&gt; pickup of requested journey -&gt; destination of requested journey -&gt; pickup of the next allocated job to the driver. This is something that is expected to be done visually by the operator when selecting the available vehicles.</p>
+
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>Ok. The current position of the driver is returned in the body.</td>
+</tr>
+<tr>
+<td>40x</td>
+<td>The server could not complete the request correctly for: user not authorized, booking not found, booking not currently in execution, driver not connected etc.</td>
+</tr>
+<tr>
+<td>50x</td>
+<td>Server error</td>
+</tr>
+</tbody></table>
+
 <h2 id="track-the-driver-of-a-booking">Track the driver of a booking</h2>
 
 <blockquote>
