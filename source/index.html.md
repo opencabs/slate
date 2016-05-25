@@ -10,6 +10,7 @@ toc_footers:
 includes:
   - bookings
   - coverage
+  - customers
   - pricing
   - tracking
   - appendices
