@@ -789,11 +789,11 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 </tr>
 <tr>
 <td><code class="prettyprint">hasUserProfile</code></td>
-<td><i>true</i>: it means that the customer</td>
+<td><i>true</i>: it means that the customer is connected to a <code class="prettyprint">user</code> profile.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">verified</code></td>
-<td><i>true</i>: advance bookings (via the cab office who will then dispatch the jobs to the drivers) are possible.</td>
+<td>the phone number is considered safe. The verification of <code class="prettyprint">customers</code> linked to <code class="prettyprint">users</code> is done via a short code sent by SMS. If the customer is not linked to a user, then it is generally set as <code class="prettyprint">verified</code> automatically.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">account</code></td>
@@ -855,6 +855,8 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 
 <h3 id="query-parameters">Query parameters</h3>
 
+<p>All parameters are optional. The maximum number of results returned is 20.</p>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -885,7 +887,7 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 <tr>
 <td><code class="prettyprint">customerId</code></td>
 <td>integer</td>
-<td></td>
+<td>Not implemented yet.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">accountId</code></td>
@@ -895,17 +897,17 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 <tr>
 <td><code class="prettyprint">format</code></td>
 <td>string</td>
-<td></td>
+<td>Set &lsquo;autocomplete&rsquo; for a short version of the response (faster).</td>
 </tr>
 <tr>
 <td><code class="prettyprint">sortBy</code></td>
 <td>string</td>
-<td></td>
+<td>Partially implemented</td>
 </tr>
 <tr>
 <td><code class="prettyprint">sortOrder</code></td>
 <td>string</td>
-<td></td>
+<td>Partially implemented.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">start</code></td>
