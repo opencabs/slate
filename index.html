@@ -727,81 +727,7 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 
           <h1 id="customers">Customers</h1>
 
-<h2 id="create-a-customer">Create a customer</h2>
-
-<blockquote>
-<p>Request</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doe"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"phoneNumberCountryCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+44"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7700001"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john.doe@mymail.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Response</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"customerId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4653</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doe"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"phoneNumberCountryCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"44"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7700001"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john.doe@mymail.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"hasUserProfile"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"vipScore"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"noShowCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John and John LLP"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p><code class="prettyprint">POST /customers</code></p>
-
-<p>Enables the creation of a new customer profile.</p>
-
-<p><strong><em>Important definitions</em></strong></p>
-
-<ul>
-<li><code class="prettyprint">customer</code>: means a passenger profile. This represents the details of a passenger for a ride and it is not necessarily connected to a <code class="prettyprint">user</code>;</li>
-<li><code class="prettyprint">user</code>: means an online profile (username + password) that enables a person to connect to the system and interact with it. <code class="prettyprint">Users</code> can be linked to <code class="prettyprint">customers</code>, but not only. For example a controller in a cab office has a <code class="prettyprint">user</code> profile that is not connected to a <code class="prettyprint">customer</code>.</li>
-</ul>
-
-<h3 id="response-details">Response details</h3>
-
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Comments</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">enabled</code></td>
-<td><i>true</i>: it means the the customer profile (i) can be used when creating bookings. Otherwise the customer profile will not appear in the customers search when creating a booking. Similarly if a <code class="prettyprint">user</code> is linked to a customer that is not enabled, the user will not be able to place bookings.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">hasUserProfile</code></td>
-<td><i>true</i>: it means that the customer is connected to a <code class="prettyprint">user</code> profile.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">verified</code></td>
-<td>the phone number is considered safe. The verification of <code class="prettyprint">customers</code> linked to <code class="prettyprint">users</code> is done via a short code sent by SMS. If the customer is not linked to a user, then it is generally set as <code class="prettyprint">verified</code> automatically.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">account</code></td>
-<td>Short details of the account connected to the <code class="prettyprint">customer</code> (used in particular to display the account name in the views).</td>
-</tr>
-</tbody></table>
-
-<h2 id="get-the-customers-list">Get the customers list</h2>
+<h2 id="get-the-customers-list">Get the Customers list</h2>
 
 <blockquote>
 <p>Response</p>
@@ -918,6 +844,143 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 <td><code class="prettyprint">max</code></td>
 <td>integer</td>
 <td></td>
+</tr>
+</tbody></table>
+
+<h2 id="create-a-new-customer">Create a new Customer</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phoneNumberCountryCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+44"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7700001"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john.doe@mymail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"customerId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4653</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phoneNumberCountryCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"44"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7700001"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john.doe@mymail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"hasUserProfile"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"vipScore"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"noShowCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John and John LLP"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">POST /customers</code></p>
+
+<p>Enables the creation of a new customer profile.</p>
+
+<p><strong><em>Important definitions</em></strong></p>
+
+<ul>
+<li><code class="prettyprint">customer</code>: means a passenger profile. This represents the details of a passenger for a ride and it is not necessarily connected to a <code class="prettyprint">user</code>;</li>
+<li><code class="prettyprint">user</code>: means an online profile (username + password) that enables a person to connect to the system and interact with it. <code class="prettyprint">Users</code> can be linked to <code class="prettyprint">customers</code>, but not only. For example a controller in a cab office has a <code class="prettyprint">user</code> profile that is not connected to a <code class="prettyprint">customer</code>.</li>
+</ul>
+
+<h3 id="response-details">Response details</h3>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">enabled</code></td>
+<td><i>true</i>: it means the the customer profile (i) can be used when creating bookings and (ii) the customer profile will  appear in the customers search when creating a booking. If a <code class="prettyprint">user</code> is linked to a <code class="prettyprint">customer</code> that is not enabled, the user will not be able to place bookings.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">hasUserProfile</code></td>
+<td><i>true</i>: it means that the customer is connected to a <code class="prettyprint">user</code> profile.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">verified</code></td>
+<td>the phone number is considered safe. The verification of <code class="prettyprint">customers</code> linked to <code class="prettyprint">users</code> is done via a short code sent by SMS. If the customer is not linked to a user, then it is generally set as <code class="prettyprint">verified</code> automatically.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">account</code></td>
+<td>Short details of the <code class="prettyprint">account</code> (generally a corporate account) connected to the <code class="prettyprint">customer</code> (used in particular to display the account name in the views).</td>
+</tr>
+</tbody></table>
+
+<h2 id="update-an-existing-customer">Update an existing Customer</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phoneNumberCountryCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+44"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7700001"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john.doe@mymail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"enables"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">PUT /customers/{id}</code></p>
+
+<p>Update the details of a <code class="prettyprint">customer</code>.</p>
+
+<h3 id="request-details">Request details</h3>
+
+<p>The request requires a JSON body with the fields to update.</p>
+
+<p>Notes:</p>
+
+<ul>
+<li><p>Any missing fields in the JSON are discarded and the old values are kept in the <code class="prettyprint">customer</code> entity being updated.</p></li>
+<li><p>If the phone number is changed, the customer verification status is reset and the <code class="prettyprint">customer</code> will need to run again through an SMS verification process. For security reasons <code class="prettyprint">customers</code> cannot be verified via this API.</p></li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">firstName</code></td>
+<td>New value for the first name.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">lastName</code></td>
+<td>New value for the last name.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">email</code></td>
+<td>New value for the email.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">phoneNumberCountryCode</code></td>
+<td>New value for the country code.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">phoneNumber</code></td>
+<td>New value for the phone number (local number, e.g. for a mobile like &rsquo;+44-7712341234&rsquo; set <code class="prettyprint">&quot;phoneNumberCountryCode&quot;: &quot;44&quot;</code> and <code class="prettyprint">&quot;phoneNumber&quot;: &quot;7712341234&quot;</code>).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">accountId</code></td>
+<td>Id of the <code class="prettyprint">Account</code> to be linked to the <code class="prettyprint">Customer</code>. Set to &#39;0&rsquo; to unlink the existing <code class="prettyprint">Account</code>.</td>
 </tr>
 </tbody></table>
 
