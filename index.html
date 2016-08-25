@@ -515,6 +515,68 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 </tr>
 </tbody></table>
 
+<h2 id="update-the-destination">Update the destination</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"destinationPOI"</span><span class="p">:</span><span class="s2">"London Heathrow (Terminal 1)"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"destinationAddress"</span><span class="p">:</span><span class="s2">"Croydon Rd"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"destinationCity"</span><span class="p">:</span><span class="s2">"Hayes"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"destinationPostcode"</span><span class="p">:</span><span class="s2">"UB3 5AP"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"destinationLatitude"</span><span class="p">:</span><span class="mf">51.4723</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"destinationLongitude"</span><span class="p">:</span><span class="mf">-0.451795</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"destinationCountry"</span><span class="p">:</span><span class="s2">"UK"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"journeyDistance"</span><span class="p">:</span><span class="w"> </span><span class="mf">27.9</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"journeyTimeMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"&lt;booking JSON object&gt;"</span><span class="p">:</span><span class="w"> </span><span class="s2">"the standard booking JSON object is returned"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">POST /bookings/{id}/update/destination</code></p>
+
+<h3 id="request">Request</h3>
+
+<p><em>Important</em>: this API is currently enabled only for drivers via the drivers apps.</p>
+
+<p>The update destination API takes body that is a subset of the booking JSON, with:</p>
+
+<ul>
+<li>destination fields;</li>
+<li>journey distance in KM: calculated by the client app calling a mapping API before making the update destination call;</li>
+<li>journey time (in minutes): this is set by the driver app.</li>
+</ul>
+
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>Ok. The destination has been update and the booking JSON is returned in the body.</td>
+</tr>
+<tr>
+<td>40x</td>
+<td>The server could not complete the request correctly for: user not authorized, booking not found, etc.</td>
+</tr>
+<tr>
+<td>50x</td>
+<td>Server error</td>
+</tr>
+</tbody></table>
+
           <h1 id="coverage">Coverage</h1>
 
 <h2 id="get-the-available-services">Get the available services</h2>
