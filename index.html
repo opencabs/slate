@@ -208,22 +208,22 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 <tr>
 <td><code>quoteId</code></td>
 <td>yes</td>
-<td>You can find the <code>quoteId</code> from the response of the Pricing service.</td>
+<td>You can find the <code>quoteId</code> from the response of the <a href="#pricing">Pricing</a> service.</td>
 </tr>
 <tr>
 <td><code>isAsap</code></td>
 <td>yes</td>
-<td>This field is used to tell the supplier to send a car as soon as they can, regardless of actual booking time. I.e. if the booking is for 20 minutes from now (which could be the contractual notice time agreed), if the supplier has a car available that can be sent immediately, then if <code>isAsap=true</code> the supplier knows that they have to send the car without waiting.</td>
+<td>This field is used to tell the supplier to send a car as soon as they can, regardless of actual booking time. I.e. if the booking is for 20 minutes from now (which could be the contractual notice time agreed) and the supplier has a car available that can be sent immediately, then if <code>isAsap=true</code> the supplier knows that they have to send the car without waiting.</td>
 </tr>
 <tr>
 <td><code>date</code></td>
 <td>yes</td>
-<td></td>
+<td>Format: &ldquo;YYYY-MM-DD’T&#39;hh:mm:ss&#39;Z’&rdquo;. E.g.: &ldquo;2017-03-03T17:54:00Z&rdquo;.</td>
 </tr>
 <tr>
 <td><code>paymentTypeId</code></td>
 <td>yes</td>
-<td></td>
+<td>You will get the available payment types in the response from the <a href="#pricing">Pricing</a> service.</td>
 </tr>
 <tr>
 <td>origin</td>
@@ -233,7 +233,7 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 <tr>
 <td>destination</td>
 <td><i>see comments</i></td>
-<td>The destination is required for fixed fares. If passed, the same validation rules as for the origin apply (i.e. the coordinates are required, and then &lsquo;enough&rsquo; address fields so that the driver can correctly identify the locations).</td>
+<td>The destination is required for fixed fares (&ldquo;fareTypeId&rdquo;=&ldquo;fixed_point_to_point&rdquo;). If passed, the same validation rules as for the origin apply (i.e. the coordinates are required, and then &lsquo;enough&rsquo; address fields so that the driver can correctly identify the locations).</td>
 </tr>
 <tr>
 <td>customer</td>
@@ -252,8 +252,11 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 </tr>
 </tbody></table>
 
-<p>Note:
- * The &#39;via point&rsquo; is now available. Please contact us for more details if needed.</p>
+<p>Note:</p>
+
+<ul>
+<li>The &#39;via point&rsquo; is now available. Please contact us for more details if needed.</li>
+</ul>
 
 <h3 id="response">Response</h3>
 
@@ -515,59 +518,62 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 <td>The id of the supplier you are sending the job to. To get this fields you need to ask your supplier for their publisher code (which they can easily find in the URL when they connect into their dispatch system).</td>
 </tr>
 <tr>
-<td><code>fareTypeId</code></td>
-<td>yes</td>
-<td>We currently support only &#39;fixed_point_to_point&rsquo; for this API.</td>
-</tr>
-<tr>
 <td><code>price</code></td>
 <td>yes</td>
 <td>Price payable to the supplier.</td>
 </tr>
 <tr>
-<td><code>isAsap</code></td>
+<td><code>fareTypeId</code></td>
 <td>yes</td>
-<td>See previous section for more details.</td>
-</tr>
-<tr>
-<td><code>date</code></td>
-<td>yes</td>
-<td>See previous section for more details.</td>
+<td>We currently support only &#39;fixed_point_to_point&rsquo; for this API.</td>
 </tr>
 <tr>
 <td><code>paymentTypeId</code></td>
 <td>yes</td>
-<td>See previous section for more details.</td>
+<td>Only &#39;cash&rsquo; and &#39;on_account&rsquo; are accepted in this API.</td>
 </tr>
 <tr>
 <td>origin</td>
 <td>yes</td>
-<td>See previous section for more details.</td>
+<td>The only strictly required fields for the origin are the <code>originLatitude</code> and <code>originLongitude</code>. The other fields are required in the measure that the supplier can uniquely identify the pickup location and meet the customer easily.</td>
+</tr>
+<tr>
+<td><code>isAsap</code></td>
+<td>yes</td>
+<td>This field is used to tell the supplier to send a car as soon as they can, regardless of actual booking time. I.e. if the booking is for 20 minutes from now (which could be the contractual notice time agreed) and the supplier has a car available that can be sent immediately, then if <code>isAsap=true</code> the supplier knows that they have to send the car without waiting.</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>yes</td>
+<td>Format: &ldquo;YYYY-MM-DD’T&#39;hh:mm:ss&#39;Z’&rdquo;. E.g.: &ldquo;2017-03-03T17:54:00Z&rdquo;.</td>
 </tr>
 <tr>
 <td>destination</td>
 <td><i>see comments</i></td>
-<td>See previous section for more details.</td>
+<td>The destination is required for fixed fares (&ldquo;fareTypeId&rdquo;=&ldquo;fixed_point_to_point&rdquo;). If passed, the same validation rules as for the origin apply (i.e. the coordinates are required, and then &#39;enough&rsquo; address fields so that the driver can correctly identify the locations).</td>
 </tr>
 <tr>
 <td>customer</td>
 <td>yes</td>
-<td>See previous section for more details.</td>
+<td>The <code>customer</code> object is required. If the id matches an existing customer linked to the same details, then the booking will be linked to the existing customer profile; otherwise a new customer profile will be created. The <code>customer</code> needs to have at least: (i) firstName, (ii) phoneNumberCountryCode, (iii) phoneNumber.</td>
 </tr>
 <tr>
 <td>Passengers/luggage</td>
 <td>yes</td>
-<td>See previous section for more details.</td>
+<td><code>numPassengers</code> is required. The luggage fields are optional.</td>
 </tr>
 <tr>
 <td><code>flightNumber</code></td>
 <td><i>see comments</i></td>
-<td>See previous section for more details.</td>
+<td>Required for all pickups at airport terminals.</td>
 </tr>
 </tbody></table>
 
-<p>Note:
- * The &#39;via point&rsquo; is now available. Please contact us for more details if needed.</p>
+<p>Note:</p>
+
+<ul>
+<li>The &#39;via point&rsquo; is now available. Please contact us for more details if needed.</li>
+</ul>
 
 <h3 id="response">Response</h3>
 
