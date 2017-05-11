@@ -145,13 +145,13 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 
           <h1 id="bookings">Bookings</h1>
 
-<h2 id="create-a-new-booking">Create a new booking</h2>
+<h2 id="create-a-booking-with-quote">Create a booking (with quote)</h2>
 
 <p><code class="prettyprint">POST /book</code></p>
 
-<p>This API enables to submit new bookings to the platform.</p>
+<p>This API enables to submit new bookings to the platform where you first have obtained a price by calling the <a href="#pricing">pricing</a> service (which returns a quote with a <code>quoteId</code> to be used in this submission).</p>
 
-<p>Generally you will need to make a <a href="#pricing">pricing</a> request to obtain a <code>quoteId</code> before submitting your booking. This is not required <u>only</u> if you are a platform and have been authorised to post jobs with a price set by yourself.</p>
+<p>If you need to post a job without a quote from the system, then please look at the following section <a href="##create-a-booking-without-quote">Create a booking (without quote)</a>.</p>
 
 <h3 id="request">Request</h3>
 
@@ -162,8 +162,8 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
    </span><span class="nt">"quoteId"</span><span class="p">:</span><span class="mi">306007</span><span class="p">,</span><span class="w">
    </span><span class="nt">"isAsap"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
    </span><span class="nt">"paymentTypeId"</span><span class="p">:</span><span class="s2">"cash"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"date"</span><span class="p">:</span><span class="s2">"2015-03-03T17:54:00Z"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"originPOI"</span><span class="p">:</span><span class="s2">"some poi"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"date"</span><span class="p">:</span><span class="s2">"2017-03-03T17:54:00Z"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"originPOI"</span><span class="p">:</span><span class="s2">"Hotel of the North"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"originAddressDetails"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"originStreetNumber"</span><span class="p">:</span><span class="s2">"262"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"originAddress"</span><span class="p">:</span><span class="s2">"Kentish Town Road"</span><span class="p">,</span><span class="w">
@@ -206,9 +206,34 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 </tr>
 </thead><tbody>
 <tr>
-<td>quoteId</td>
-<td>(see comments)</td>
-<td>The quoteId is required in all cases except if the publisher has been explicitly authorised (set up done by OpenCabs) for being able to post bookings without <code>quoteId</code>.<br>In this case the <code>price</code> has to be included in the JSON with the request, as well as the id of the company to which the booking is allocated, e.g.<br><code class="prettyprint">&quot;price&quot;: 23.50</code><br><code class="prettyprint">&quot;managingCompanyId&quot;: 308</code></td>
+<td><code>quoteId</code></td>
+<td>yes</td>
+<td>You can find the <code>quoteId</code> from the response of the Pricing service.</td>
+</tr>
+<tr>
+<td><code>isAsap</code></td>
+<td>yes</td>
+<td>This field is used to tell the supplier to send a car as soon as they can, regardless of actual booking time. I.e. if the booking is for 20 minutes from now (which could be the contractual notice time agreed), if the supplier has a car available that can be sent immediately, then if <code>isAsap=true</code> the supplier knows that they have to send the car without waiting.</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>paymentTypeId</code></td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>origin</td>
+<td>yes</td>
+<td>The only strictly required fields for the origin are the <code>originLatitude</code> and <code>originLongitude</code>. The other fields are required in the measure that the supplier can uniquely identify the pickup location and meet the customer easily.</td>
+</tr>
+<tr>
+<td>destination</td>
+<td><i>see comments</i></td>
+<td>The destination is required for fixed fares. If passed, the same validation rules as for the origin apply (i.e. the coordinates are required, and then &lsquo;enough&rsquo; address fields so that the driver can correctly identify the locations).</td>
 </tr>
 <tr>
 <td>customer</td>
@@ -216,18 +241,333 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 <td>The <code>customer</code> object is required. If the id matches an existing customer linked to the same details, then the booking will be linked to the existing customer profile; otherwise a new customer profile will be created. The <code>customer</code> needs to have at least: (i) firstName, (ii) phoneNumberCountryCode, (iii) phoneNumber.</td>
 </tr>
 <tr>
-<td>isAsap</td>
+<td>Passengers/luggage</td>
 <td>yes</td>
-<td>This field is used to tell the supplier to send a car as soon as they can, regardless of actual booking time. I.e. if the booking is for 20 minutes from now (which could be the contractual notice time agreed), if the supplier has a car available that can be sent immediately, then if <code>isAsap=true</code> the supplier knows that they have to send the car without waiting.</td>
+<td><code>numPassengers</code> is required. The luggage fields are optional.</td>
 </tr>
 <tr>
-<td>flightNumber</td>
+<td><code>flightNumber</code></td>
 <td><i>see comments</i></td>
 <td>Required for all pickups at airport terminals.</td>
 </tr>
 </tbody></table>
 
-<p>Note: the &lsquo;via point&rsquo; feature is only partially implemented. If you have via points in your booking we suggest that you put the via points addresses in the comments (in human readable form and without coordinates).</p>
+<p>Note:
+ * The &#39;via point&rsquo; is now available. Please contact us for more details if needed.</p>
+
+<h3 id="response">Response</h3>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"nbAllItems"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"booking"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"timezoneOffset"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"bookingStops"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"showDestination"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"showPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-11 14:02:19"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">444411</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"originPOI"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London Heathrow (Terminal 1) (LHR)"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"originAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Croydon Rd"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"originCity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hounslow"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"originPostcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UB3 5AP"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"originLatitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.4723</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"originLongitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.451795</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"destinationPOI"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"destinationAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Little Portland Street"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"destinationCity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Greater London"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"destinationPostcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"W1W 7JB"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"destinationLatitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.517353</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"destinationLongitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.140401</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Meet and Greet pickup."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"flightNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AF123"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"numPassengers"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"numLargeItems"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"numSmallItems"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"vehicleCategory"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+      </span><span class="nt">"journeyDistance"</span><span class="p">:</span><span class="w"> </span><span class="mf">31.314</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"journeyTimeMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">48</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"paymentType"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">44.5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fareType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fixed_point_to_point"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"expiryDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-11 14:07:19"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"originCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UK"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"isAsap"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"destinationCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"destinationStreetNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"statusId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"acknowledgedByCompany"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"isHailing"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"minPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">44.5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"maxPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">44.5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"netPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">44.5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"vat"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"minPriceNet"</span><span class="p">:</span><span class="w"> </span><span class="mf">44.5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"minPriceVat"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"maxPriceNet"</span><span class="p">:</span><span class="w"> </span><span class="mf">44.5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"maxPriceVat"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"airportBooking"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"createdByUserCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"automaticallyAccepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"currencyXml"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+      </span><span class="nt">"totalCustomerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">44.5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"typeId"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"vehicleCategoryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Saloon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-18 23:55:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"timeZone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Europe/London"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span><span class="p">{</span><span class="w">  
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4098755</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"statusId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"customerId"</span><span class="p">:</span><span class="w"> </span><span class="mi">434665</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moise"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Errol"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"phoneNumberCountryCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"44"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"78812341234"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"vipScore"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"noShowCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"originStreetNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"originAddressDetails"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"originAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Westminster Bridge Road"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"originPOI"</span><span class="p">:</span><span class="w"> </span><span class="s2">"St. Thomas' Hospital"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"originCity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lambeth"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"originCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United Kingdom"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"originPostcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SE1 7HY"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"originLatitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.4988</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"originLongitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.117893</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destinationStreetNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destinationAddressDetails"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destinationAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Faircross Avenue"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destinationPOI"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destinationCity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Barking"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destinationCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United Kingdom"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destinationPostcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IG11 8RD"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destinationLatitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.542</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destinationLongitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0831571</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"isAsap"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-03 17:54:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"timezoneOffset"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"timeZone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Europe/London"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"numLargeItems"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"numSmallItems"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"numPassengers"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"journeyDistance"</span><span class="p">:</span><span class="w"> </span><span class="mf">18.843</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"journeyTimeMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"airportBooking"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"automaticallyAccepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"acknowledgedByCompany"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"bookingStops"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"fareType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fixed_point_to_point"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"netPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">43.3</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"vat"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">43.3</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"totalCustomerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">43.3</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"showPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currencyXml"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"currencyId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"currencyLongSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"currencyName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pound"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"currencySymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"£"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"shortName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABC Cabs"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"distance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABC Cabs "</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"paymentType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cash"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"shortDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cash"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cash payment"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"isDefault"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"vehicleCategory"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"defaultCategoryForCountry"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"capacityPassengers"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"capacityLargeLuggage"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"descriptionLong"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Saloon"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"descriptionShort"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Saloon"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"capacitySmallLuggage"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"commonName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"standard_car"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Saloon"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"managingCompany"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"companyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">8647</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"companyName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"East Ten Cars Limited"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"companyLatitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.5144</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"companyLongitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.0542385</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"orderPhone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+442077771234"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-11 16:48:14"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"expiryDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-11 16:58:14"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>201</td>
+<td>The booking has been successfully created.</td>
+</tr>
+<tr>
+<td>40x</td>
+<td>The request has not been completed correctly: incorrect data passed, user not authorized, etc.</td>
+</tr>
+<tr>
+<td>50x</td>
+<td>Server error</td>
+</tr>
+</tbody></table>
+
+<h2 id="create-a-booking-without-quote">Create a booking (without quote)</h2>
+
+<p><code class="prettyprint">POST /book</code></p>
+
+<p>This API enables to submit new bookings to the platform in the case where you have pre-agreed arrangements with the suppliers and you do not need to obtain a quote from the system.</p>
+
+<p>Note: you can <u>only</u> post jobs without a quote if your account has been previously authorised to do so.</p>
+
+<h3 id="request">Request</h3>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"isAsap"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"preAccepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"managingPublisherId"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"paymentTypeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"on_account"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fareTypeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fixed_point_to_point"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">44.50</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-18T23:55:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"originPOI"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London Heathrow (Terminal 1) (LHR)"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"originAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Croydon Rd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"originCity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hounslow"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"originPostcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UB3 5AP"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"originLatitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.4723</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"originLongitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.451795</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"originCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UK"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destinationPOI"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destinationStreetNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destinationAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Little Portland Street"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destinationCity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Greater London"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destinationPostcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"W1W 7JB"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destinationLatitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.517352</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destinationLongitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.1404009999999971</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destinationCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Meet and Greet pickup."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"flightNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AF123"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"numPassengers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"numSmallItems"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"numLargeItems"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"vehicleCategoryId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"phoneNumberCountryCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"44"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"createdByUserCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"forceAnonymousCustomer"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Fields details:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>preAccepted</code></td>
+<td>yes</td>
+<td>Boolean.</td>
+</tr>
+<tr>
+<td><code>managingPublisherId</code></td>
+<td>yes</td>
+<td>The id of the supplier you are sending the job to. To get this fields you need to ask your supplier for their publisher code (which they can easily find in the URL when they connect into their dispatch system).</td>
+</tr>
+<tr>
+<td><code>fareTypeId</code></td>
+<td>yes</td>
+<td>We currently support only &#39;fixed_point_to_point&rsquo; for this API.</td>
+</tr>
+<tr>
+<td><code>price</code></td>
+<td>yes</td>
+<td>Price payable to the supplier.</td>
+</tr>
+<tr>
+<td><code>isAsap</code></td>
+<td>yes</td>
+<td>See previous section for more details.</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>yes</td>
+<td>See previous section for more details.</td>
+</tr>
+<tr>
+<td><code>paymentTypeId</code></td>
+<td>yes</td>
+<td>See previous section for more details.</td>
+</tr>
+<tr>
+<td>origin</td>
+<td>yes</td>
+<td>See previous section for more details.</td>
+</tr>
+<tr>
+<td>destination</td>
+<td><i>see comments</i></td>
+<td>See previous section for more details.</td>
+</tr>
+<tr>
+<td>customer</td>
+<td>yes</td>
+<td>See previous section for more details.</td>
+</tr>
+<tr>
+<td>Passengers/luggage</td>
+<td>yes</td>
+<td>See previous section for more details.</td>
+</tr>
+<tr>
+<td><code>flightNumber</code></td>
+<td><i>see comments</i></td>
+<td>See previous section for more details.</td>
+</tr>
+</tbody></table>
+
+<p>Note:
+ * The &#39;via point&rsquo; is now available. Please contact us for more details if needed.</p>
 
 <h3 id="response">Response</h3>
 
