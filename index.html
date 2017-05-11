@@ -507,7 +507,7 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 <tr>
 <td><code>preAccepted</code></td>
 <td>yes</td>
-<td>Boolean.</td>
+<td>This fields defines whether the job is considered accepted by the supplier or whether the supplier has to explicitly accept it in the dispatch. If you set <code>preAccepted</code>=&#39;false&rsquo; then the booking will be created in status NEW (0). At this point the supplier is notified and if they accept the booking, the status is set to BOOKED (1), otherwise the booking status is set to EXPIRED (5). If you set <code>preAccepted</code>=&#39;true&rsquo; then the booking is created directly in status BOOKED (1) and there are no actions required by the supplier.</td>
 </tr>
 <tr>
 <td><code>managingPublisherId</code></td>
