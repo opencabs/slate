@@ -80,13 +80,13 @@ Note:
   "booking": [
     {
       "id": 444411,
+      "clientBookingReference":"12345",
       "timezoneOffset": 1,
       "currency": "GBP",
       "bookingStops": [],
       "showDestination": true,
       "showPrice": true,
       "created": "2017-05-11 14:02:19",
-      "clientBookingReference":"12345",
       "originPOI": "London Heathrow (Terminal 1) (LHR)",
       "originAddress": "Croydon Rd",
       "originCity": "Hounslow",
@@ -257,6 +257,7 @@ Note: you can <u>only</u> post jobs without a quote if your account has been pre
     "managingPublisherId": 5,
     "paymentTypeId": "on_account",
     "fareTypeId": "fixed_point_to_point",
+    "clientBookingReference":"12345",
     "price": 44.50,
     "date": "2017-05-18T23:55:00Z",
     "originPOI": "London Heathrow (Terminal 1) (LHR)",
@@ -319,6 +320,7 @@ Note:
 ```json
 {  
     "id": 4098755,
+    "clientBookingReference":"12345",
     "statusId": 1,
     "customer": {
         "customerId": 434665,
