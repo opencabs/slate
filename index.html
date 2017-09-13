@@ -162,6 +162,7 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
    </span><span class="nt">"quoteId"</span><span class="p">:</span><span class="mi">306007</span><span class="p">,</span><span class="w">
    </span><span class="nt">"isAsap"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
    </span><span class="nt">"paymentTypeId"</span><span class="p">:</span><span class="s2">"cash"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"clientBookingReference"</span><span class="p">:</span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"date"</span><span class="p">:</span><span class="s2">"2017-03-03T17:54:00Z"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"originPOI"</span><span class="p">:</span><span class="s2">"Hotel of the North"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"originAddressDetails"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w">
@@ -267,13 +268,14 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
   </span><span class="nt">"nbAllItems"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nt">"booking"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">444411</span><span class="p">,</span><span class="w">
       </span><span class="nt">"timezoneOffset"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"bookingStops"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
       </span><span class="nt">"showDestination"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="nt">"showPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-11 14:02:19"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">444411</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"clientBookingReference"</span><span class="p">:</span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"originPOI"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London Heathrow (Terminal 1) (LHR)"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"originAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Croydon Rd"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"originCity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hounslow"</span><span class="p">,</span><span class="w">
@@ -295,7 +297,6 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
       </span><span class="nt">"journeyDistance"</span><span class="p">:</span><span class="w"> </span><span class="mf">31.314</span><span class="p">,</span><span class="w">
       </span><span class="nt">"journeyTimeMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">48</span><span class="p">,</span><span class="w">
       </span><span class="nt">"paymentType"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">44.5</span><span class="p">,</span><span class="w">
       </span><span class="nt">"fareType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fixed_point_to_point"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nt">"expiryDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-11 14:07:19"</span><span class="p">,</span><span class="w">
@@ -306,19 +307,14 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
       </span><span class="nt">"statusId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nt">"acknowledgedByCompany"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="nt">"isHailing"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"minPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">44.5</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"maxPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">44.5</span><span class="p">,</span><span class="w">
       </span><span class="nt">"netPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">44.5</span><span class="p">,</span><span class="w">
       </span><span class="nt">"vat"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"minPriceNet"</span><span class="p">:</span><span class="w"> </span><span class="mf">44.5</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"minPriceVat"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"maxPriceNet"</span><span class="p">:</span><span class="w"> </span><span class="mf">44.5</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"maxPriceVat"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">44.5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"totalCustomerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">44.5</span><span class="p">,</span><span class="w">
       </span><span class="nt">"airportBooking"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="nt">"createdByUserCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
       </span><span class="nt">"automaticallyAccepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="nt">"currencyXml"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-      </span><span class="nt">"totalCustomerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">44.5</span><span class="p">,</span><span class="w">
       </span><span class="nt">"typeId"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
       </span><span class="nt">"vehicleCategoryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Saloon"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-18 23:55:00"</span><span class="p">,</span><span class="w">
@@ -1436,6 +1432,7 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
    </span><span class="nt">"isAsap"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">  
    </span><span class="nt">"date"</span><span class="p">:</span><span class="s2">"2015-03-03T17:54:00Z"</span><span class="p">,</span><span class="w">  
    </span><span class="nt">"fareTypeId"</span><span class="p">:</span><span class="s2">"fixed_point_to_point"</span><span class="p">,</span><span class="w">  
+   </span><span class="nt">"clientBookingReference"</span><span class="p">:</span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"originPOI"</span><span class="p">:</span><span class="s2">"some poi"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"originAddressDetails"</span><span class="p">:</span><span class="s2">"York House"</span><span class="p">,</span><span class="w">  
    </span><span class="nt">"originStreetNumber"</span><span class="p">:</span><span class="s2">"262"</span><span class="p">,</span><span class="w">  
@@ -1532,6 +1529,7 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
       </span><span class="nt">"typeId"</span><span class="p">:</span><span class="mi">38</span><span class="p">,</span><span class="w">
       </span><span class="nt">"isAsap"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="nt">"statusId"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"clientBookingReference"</span><span class="p">:</span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"originAddress"</span><span class="p">:</span><span class="s2">"Kentish Town Road"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"originCity"</span><span class="p">:</span><span class="s2">"Greater London"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"originCountry"</span><span class="p">:</span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
