@@ -6,7 +6,7 @@
 
 This API enables to submit new bookings to the platform where you first have obtained a price by calling the <a href="#pricing">pricing</a> service (which returns a quote with a <code>quoteId</code> to be used in this submission).
 
-If you need to post a job without a quote from the system, then please look at the following section <a href="##create-a-booking-without-quote">Create a booking (without quote)</a>.
+If you need to post a job without a quote from the system, then please look at the following section <a href="#create-a-booking-without-quote">Create a booking (without quote)</a>.
 
 ### Request
 
