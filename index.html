@@ -124,6 +124,40 @@
 
 <p>The main difference with the “Customers APIs” is that the end customer is not required to register within the OpenCabs platform. It&rsquo;s a user authorized by the publisher who is in charge of creating the booking for the end customer.</p>
 
+<h1 id="aggregators-integration">Aggregators integration</h1>
+
+<p>If your company is an aggregator (such as a travel site), there are two integration types to send the bookings to your suppliers, whether <b>(1) <u>you set</u> the price</b> or <b>(2) if <u>you get</u> the price from the suppliers dynamically</b>.</p>
+
+<h2 id="1-bookings-integration-with-price-set-by-you">(1) Bookings integration, with price set by you</h2>
+
+<p>If the prices are calculated by you, the aggregator (typically based on prices pre-agreed with the suppliers), here are the APIs to use:</p>
+
+<ul>
+<li><a href="#create-a-booking-without-quote">Posting a booking with set price (i.e. without a quote)</a></li>
+<li><a href="#cancel-a-booking">Cancelling a job</a></li>
+</ul>
+
+<h2 id="2-bookings-integration-with-live-prices-from-your-suppliers">(2) Bookings integration, with live prices from your suppliers</h2>
+
+<p>If you want to let your suppliers to set the prices, you then need to call the &#39;pricing&rsquo; API to get a price (and a quoteId for the requested journey), so that you can then use this quoteId to post the job.</p>
+
+<p>The list of APIs needed in this case is:</p>
+
+<ul>
+<li><a href="#get-the-price-for-a-journey">Getting the price for a journey</a></li>
+<li>From the service above, you will get a quoteId that you can use to in the <a href="#create-a-booking-with-quote">post a booking with a quote</a> API</li>
+<li><a href="#cancel-a-booking">Cancelling a job</a></li>
+</ul>
+
+<h2 id="additional-useful-apis">Additional useful APIs</h2>
+
+<p>In addition to the &#39;booking integration&rsquo; to send jobs to your suppliers, the following APIs can be particularly useful:</p>
+
+<ul>
+<li><a href="#get-the-details-of-a-booking">Get the details of a job</a> to check the status and the driver details;</li>
+<li><a href="#track-the-driver-of-a-booking">Track the position of the driver</a> of a job, if the job is in execution.</li>
+</ul>
+
 <h1 id="authentication">Authentication</h1>
 
 <p>OpenCabs uses API keys to allow access to the API. You can obtain an ApiKey by contacting us on support@opencabs.com.</p>
@@ -149,7 +183,7 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 
 <p>This API enables to submit new bookings to the platform where you first have obtained a price by calling the <a href="#pricing">pricing</a> service (which returns a quote with a <code>quoteId</code> to be used in this submission).</p>
 
-<p>If you need to post a job without a quote from the system, then please look at the following section <a href="##create-a-booking-without-quote">Create a booking (without quote)</a>.</p>
+<p>If you need to post a job without a quote from the system, then please look at the following section <a href="#create-a-booking-without-quote">Create a booking (without quote)</a>.</p>
 
 <h3 id="request">Request</h3>
 
