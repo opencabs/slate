@@ -37,6 +37,28 @@ If you need to post a job without a quote from the system, then please look at t
    "destinationLatitude":51.4723,
    "destinationLongitude":-0.451795,
    "destinationCountry":"UK",
+   "bookingStops": [{
+       "index": 0,
+       "POI": "",
+       "streetNumber": "14",
+       "address": "Woronzow Road",
+       "city": "London",
+       "postcode": "NW8 6",
+       "latitude": 51.536430,
+       "longitude": -0.168620,
+       "country": "GB"
+     }, {
+       "index": 1,
+       "POI": "",
+       "addressDetails": "",
+       "streetNumber": "1",
+       "address": "Molesford Road",
+       "city": "London",
+       "postcode": "SW6 4",
+       "latitude": 51.536430,
+       "longitude": -0.168620,
+       "country": "GB"
+   }],  
    "comments":"some notes",
    "flightNumber":"AB12345",
    "numPassengers":1,

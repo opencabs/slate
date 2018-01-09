@@ -34,6 +34,28 @@
    "numLargeItems":0,  
    "numSmallItems":0,  
    "vehicleCategoryCommonName": "standard_car",  
+   "bookingStops": [{
+       "index": 0,
+       "POI": "",
+       "streetNumber": "14",
+       "address": "Woronzow Road",
+       "city": "London",
+       "postcode": "NW8 6",
+       "latitude": 51.536430,
+       "longitude": -0.168620,
+       "country": "GB"
+     }, {
+       "index": 1,
+       "POI": "",
+       "addressDetails": "",
+       "streetNumber": "1",
+       "address": "Molesford Road",
+       "city": "London",
+       "postcode": "SW6 4",
+       "latitude": 51.536430,
+       "longitude": -0.168620,
+       "country": "GB"
+   }],   
    "customer":{  
       "firstName":"John",  
       "lastName":"Doe",  
