@@ -196,6 +196,8 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
    </span><span class="nt">"paymentTypeId"</span><span class="p">:</span><span class="s2">"cash"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"clientBookingReference"</span><span class="p">:</span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"date"</span><span class="p">:</span><span class="s2">"2017-03-03T17:54:00Z"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"journeyTimeMinutes"</span><span class="p">:</span><span class="mi">51</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"journeyDistance"</span><span class="p">:</span><span class="mf">28.192</span><span class="p">,</span><span class="w">
    </span><span class="nt">"originPOI"</span><span class="p">:</span><span class="s2">"Hotel of the North"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"originAddressDetails"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"originStreetNumber"</span><span class="p">:</span><span class="s2">"262"</span><span class="p">,</span><span class="w">
@@ -217,7 +219,7 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
    </span><span class="nt">"numPassengers"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
    </span><span class="nt">"numSmallItems"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
    </span><span class="nt">"numLargeItems"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"vehicleCategoryId"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"vehicleCategoryCommonName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"standard_car"</span><span class="p">,</span><span class="w">  
    </span><span class="nt">"customer"</span><span class="p">:{</span><span class="w">  
       </span><span class="nt">"customerId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
       </span><span class="nt">"firstName"</span><span class="p">:</span><span class="s2">"John"</span><span class="p">,</span><span class="w">
@@ -249,6 +251,16 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 <td>This field is used to tell the supplier to send a car as soon as they can, regardless of actual booking time. I.e. if the booking is for 20 minutes from now (which could be the contractual notice time agreed) and the supplier has a car available that can be sent immediately, then if <code>isAsap=true</code> the supplier knows that they have to send the car without waiting.</td>
 </tr>
 <tr>
+<td><code>journeyTimeMinutes</code></td>
+<td>yes</td>
+<td>Driving time (in minutes, integer value) calculated by the routing system to go from the pickup to the destination (and passing through any &lsquo;via points&rsquo;)</td>
+</tr>
+<tr>
+<td><code>journeyDistance</code></td>
+<td>yes</td>
+<td>Driving distance (in kilometres) calculated by the routing system to go from the pickup to the destination (and passing through any &#39;via points&rsquo;)</td>
+</tr>
+<tr>
 <td><code>date</code></td>
 <td>yes</td>
 <td>Format: &ldquo;YYYY-MM-DD’T&#39;hh:mm:ss&#39;Z’&rdquo;. E.g.: &ldquo;2017-03-03T17:54:00Z&rdquo;.</td>
@@ -266,7 +278,7 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 <tr>
 <td>destination</td>
 <td><i>see comments</i></td>
-<td>The destination is required for fixed fares (&ldquo;fareTypeId&rdquo;=&ldquo;fixed_point_to_point&rdquo;). If passed, the same validation rules as for the origin apply (i.e. the coordinates are required, and then &lsquo;enough&rsquo; address fields so that the driver can correctly identify the locations).</td>
+<td>The destination is required for fixed fares (&ldquo;fareTypeId&rdquo;=&ldquo;fixed_point_to_point&rdquo;). If passed, the same validation rules as for the origin apply (i.e. the coordinates are required, and then &#39;enough&rsquo; address fields so that the driver can correctly identify the locations).</td>
 </tr>
 <tr>
 <td>customer</td>
@@ -494,6 +506,8 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
     </span><span class="nt">"fareTypeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fixed_point_to_point"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"clientBookingReference"</span><span class="p">:</span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">44.50</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"journeyTimeMinutes"</span><span class="p">:</span><span class="mi">51</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"journeyDistance"</span><span class="p">:</span><span class="mf">28.192</span><span class="p">,</span><span class="w">
     </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-18T23:55:00Z"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"originPOI"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London Heathrow (Terminal 1) (LHR)"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"originAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Croydon Rd"</span><span class="p">,</span><span class="w">
@@ -515,7 +529,7 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
     </span><span class="nt">"numPassengers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"numSmallItems"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"numLargeItems"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"vehicleCategoryId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"vehicleCategoryCommonName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"standard_car"</span><span class="p">,</span><span class="w">  
     </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
@@ -545,6 +559,16 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 <td><code>managingPublisherId</code></td>
 <td>yes</td>
 <td>The id of the supplier you are sending the job to. To get this fields you need to ask your supplier for their publisher code (which they can easily find in the URL when they connect into their dispatch system).</td>
+</tr>
+<tr>
+<td><code>journeyTimeMinutes</code></td>
+<td>yes</td>
+<td>Driving time (in minutes, integer value) calculated by the routing system to go from the pickup to the destination (and passing through any &#39;via points&rsquo;)</td>
+</tr>
+<tr>
+<td><code>journeyDistance</code></td>
+<td>yes</td>
+<td>Driving distance (in kilometres) calculated by the routing system to go from the pickup to the destination (and passing through any &#39;via points&rsquo;)</td>
 </tr>
 <tr>
 <td><code>price</code></td>
@@ -1467,6 +1491,8 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
    </span><span class="nt">"date"</span><span class="p">:</span><span class="s2">"2015-03-03T17:54:00Z"</span><span class="p">,</span><span class="w">  
    </span><span class="nt">"fareTypeId"</span><span class="p">:</span><span class="s2">"fixed_point_to_point"</span><span class="p">,</span><span class="w">  
    </span><span class="nt">"clientBookingReference"</span><span class="p">:</span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"journeyTimeMinutes"</span><span class="p">:</span><span class="mi">51</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"journeyDistance"</span><span class="p">:</span><span class="mf">28.192</span><span class="p">,</span><span class="w">
    </span><span class="nt">"originPOI"</span><span class="p">:</span><span class="s2">"some poi"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"originAddressDetails"</span><span class="p">:</span><span class="s2">"York House"</span><span class="p">,</span><span class="w">  
    </span><span class="nt">"originStreetNumber"</span><span class="p">:</span><span class="s2">"262"</span><span class="p">,</span><span class="w">  
@@ -1488,7 +1514,7 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
    </span><span class="nt">"numPassengers"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">  
    </span><span class="nt">"numLargeItems"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">  
    </span><span class="nt">"numSmallItems"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">  
-   </span><span class="nt">"vehicleCategoryId"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">  
+   </span><span class="nt">"vehicleCategoryCommonName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"standard_car"</span><span class="p">,</span><span class="w">  
    </span><span class="nt">"customer"</span><span class="p">:{</span><span class="w">  
       </span><span class="nt">"firstName"</span><span class="p">:</span><span class="s2">"John"</span><span class="p">,</span><span class="w">  
       </span><span class="nt">"lastName"</span><span class="p">:</span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">  
@@ -1533,9 +1559,19 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 <td>In local time with the format yyyy-mm-dd’T’hh:mm:ss’Z’</td>
 </tr>
 <tr>
+<td>journeyTimeMinutes</td>
+<td>yes</td>
+<td>Driving time (in minutes, integer value) calculated by the routing system to go from the pickup to the destination (and passing through any &#39;via points&rsquo;)</td>
+</tr>
+<tr>
+<td>journeyDistance</td>
+<td>yes</td>
+<td>Driving distance (in kilometres) calculated by the routing system to go from the pickup to the destination (and passing through any &#39;via points&rsquo;)</td>
+</tr>
+<tr>
 <td>fareTypeId</td>
 <td>yes</td>
-<td>Possible values: fixed_point_to_point, metered, as_directed (not implemented yet)</td>
+<td>Possible values: &#39;fixed_point_to_point&rsquo;, &#39;metered&rsquo;, &#39;as_directed&rsquo; (not implemented yet)</td>
 </tr>
 <tr>
 <td>flightNumber</td>
@@ -2137,7 +2173,7 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 <table><thead>
 <tr>
 <th>Id</th>
-<th>Code</th>
+<th>CoommonName</th>
 <th>Pax</th>
 <th>Bags-L</th>
 <th>Bags-S</th>
@@ -2145,65 +2181,65 @@ You must replace <code>your-api-key</code>, <code>your-api-key</code> and <code>
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>1</strong></td>
-<td>standard_car</td>
+<td>1</td>
+<td><strong>standard_car</strong></td>
 <td>4</td>
 <td>2</td>
 <td>2</td>
 <td><strong>Saloon</strong> (Prius)</td>
 </tr>
 <tr>
-<td><strong>2</strong></td>
-<td>estate_car</td>
+<td>2</td>
+<td><strong>estate_car</strong></td>
 <td>4</td>
 <td>4</td>
 <td>2</td>
 <td><strong>Estate</strong> (Prius+)</td>
 </tr>
 <tr>
-<td><strong>3</strong></td>
-<td>small_mpv</td>
+<td>3</td>
+<td><strong>small_mpv</strong></td>
 <td>5</td>
 <td>4</td>
 <td>3</td>
 <td><strong>Small MPV</strong> (Zafira)</td>
 </tr>
 <tr>
-<td><strong>4</strong></td>
-<td>mpv</td>
+<td>4</td>
+<td><strong>mpv</strong></td>
 <td>6</td>
 <td>4</td>
 <td>3</td>
 <td><strong>Large MPV</strong> (Galaxy, 6 pax + hand luggage or 5 pax + bags</td>
 </tr>
 <tr>
-<td><strong>11</strong></td>
-<td>small_van</td>
+<td>11</td>
+<td><strong>small_van</strong></td>
 <td>8</td>
 <td>2</td>
 <td>2</td>
 <td><strong>8 seaters</strong> (Transporter)</td>
 </tr>
 <tr>
-<td><strong>6</strong></td>
-<td>executive_car</td>
+<td>6</td>
+<td><strong>executive_car</strong></td>
 <td>4</td>
 <td>2</td>
 <td>2</td>
 <td><strong>Executive Saloon</strong> (E-Class)</td>
 </tr>
 <tr>
-<td><strong>634</strong></td>
-<td>executive_van</td>
-<td>6</td>
+<td>634</td>
+<td><strong>executive_van</strong></td>
+<td>7</td>
 <td>6</td>
 <td>3</td>
 <td><strong>Executive MPV</strong> (V-Class)</td>
 </tr>
 <tr>
-<td><strong>49</strong></td>
-<td>luxury_car</td>
-<td>3</td>
+<td>49</td>
+<td><strong>luxury_car</strong></td>
+<td>4</td>
 <td>2</td>
 <td>2</td>
 <td><strong>Luxury Saloon</strong> (S-Class)</td>
