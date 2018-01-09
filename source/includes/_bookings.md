@@ -19,6 +19,8 @@ If you need to post a job without a quote from the system, then please look at t
    "paymentTypeId":"cash",
    "clientBookingReference":"12345",
    "date":"2017-03-03T17:54:00Z",
+   "journeyTimeMinutes":51,
+   "journeyDistance":28.192,
    "originPOI":"Hotel of the North",
    "originAddressDetails":"12",
    "originStreetNumber":"262",
@@ -58,6 +60,8 @@ Name   | Required | Comments
 ----------- | ----------- | -----------
 <code>quoteId</code> | yes | You can find the <code>quoteId</code> from the response of the <a href="#pricing">Pricing</a> service.
 <code>isAsap</code> | yes | This field is used to tell the supplier to send a car as soon as they can, regardless of actual booking time. I.e. if the booking is for 20 minutes from now (which could be the contractual notice time agreed) and the supplier has a car available that can be sent immediately, then if <code>isAsap=true</code> the supplier knows that they have to send the car without waiting.
+<code>journeyTimeMinutes</code> | yes | Driving time (in minutes, integer value) calculated by the routing system to go from the pickup to the destination (and passing through any 'via points')
+<code>journeyDistance</code> | yes | Driving distance (in kilometres) calculated by the routing system to go from the pickup to the destination (and passing through any 'via points')
 <code>date</code> | yes | Format: "YYYY-MM-DD’T'hh:mm:ss'Z’". E.g.: "2017-03-03T17:54:00Z".
 <code>paymentTypeId</code> | yes | You will get the available payment types in the response from the <a href="#pricing">Pricing</a> service.
 origin | yes | The only strictly required fields for the origin are the <code>originLatitude</code> and <code>originLongitude</code>. The other fields are required in the measure that the supplier can uniquely identify the pickup location and meet the customer easily.
@@ -259,6 +263,8 @@ Note: you can <u>only</u> post jobs without a quote if your account has been pre
     "fareTypeId": "fixed_point_to_point",
     "clientBookingReference":"12345",
     "price": 44.50,
+    "journeyTimeMinutes":51,
+    "journeyDistance":28.192,
     "date": "2017-05-18T23:55:00Z",
     "originPOI": "London Heathrow (Terminal 1) (LHR)",
     "originAddress": "Croydon Rd",
@@ -298,6 +304,8 @@ Name   | Required | Comments
 ----------- | ----------- | -----------
 <code>preAccepted</code> | yes | This fields defines whether the job is considered accepted by the supplier or whether the supplier has to explicitly accept it in the dispatch. If you set <code>preAccepted</code>='false' then the booking will be created in status NEW (0). At this point the supplier is notified and if they accept the booking, the status is set to BOOKED (1), otherwise the booking status is set to EXPIRED (5). If you set <code>preAccepted</code>='true' then the booking is created directly in status BOOKED (1) and there are no actions required by the supplier.
 <code>managingPublisherId</code> | yes | The id of the supplier you are sending the job to. To get this fields you need to ask your supplier for their publisher code (which they can easily find in the URL when they connect into their dispatch system).
+<code>journeyTimeMinutes</code> | yes | Driving time (in minutes, integer value) calculated by the routing system to go from the pickup to the destination (and passing through any 'via points')
+<code>journeyDistance</code> | yes | Driving distance (in kilometres) calculated by the routing system to go from the pickup to the destination (and passing through any 'via points')
 <code>price</code> | yes | Price payable to the supplier.
 <code>fareTypeId</code> | yes | We currently support only 'fixed_point_to_point' for this API.
 <code>paymentTypeId</code> | yes | Only 'cash' and 'on_account' are accepted in this API.

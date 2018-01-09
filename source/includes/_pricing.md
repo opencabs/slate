@@ -10,6 +10,8 @@
    "date":"2015-03-03T17:54:00Z",  
    "fareTypeId":"fixed_point_to_point",  
    "clientBookingReference":"12345",
+   "journeyTimeMinutes":51,
+   "journeyDistance":28.192,
    "originPOI":"some poi",
    "originAddressDetails":"York House",  
    "originStreetNumber":"262",  
@@ -61,7 +63,9 @@ Parameter | Required | Description
 --------- | -------- | -----------
 isAsap | yes | If set to true, the result will also include cats
 date | yes | In local time with the format yyyy-mm-dd’T’hh:mm:ss’Z’
-fareTypeId | yes | Possible values: fixed_point_to_point, metered, as_directed (not implemented yet)
+journeyTimeMinutes | yes | Driving time (in minutes, integer value) calculated by the routing system to go from the pickup to the destination (and passing through any 'via points')
+journeyDistance | yes | Driving distance (in kilometres) calculated by the routing system to go from the pickup to the destination (and passing through any 'via points')
+fareTypeId | yes | Possible values: 'fixed_point_to_point', 'metered', 'as_directed' (not implemented yet)
 flightNumber | yes, for airport pickups | Flight number (e.g. BA123) which will enable suppliers to monitor flights for delays and cancellations
 
 ### Response
