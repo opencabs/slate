@@ -40,7 +40,7 @@ If you need to post a job without a quote from the system, then please look at t
    "numPassengers":1,
    "numSmallItems":0,
    "numLargeItems":0,
-   "vehicleCategoryId":1,
+   "vehicleCategoryCommonName": "standard_car",  
    "customer":{  
       "customerId": 1234,
       "firstName":"John",
@@ -280,7 +280,7 @@ Note: you can <u>only</u> post jobs without a quote if your account has been pre
     "numPassengers": "3",
     "numSmallItems": "1",
     "numLargeItems": "2",
-    "vehicleCategoryId": 1,
+    "vehicleCategoryCommonName": "standard_car",  
     "customer": {
         "firstName": "John",
         "lastName": "Doe",

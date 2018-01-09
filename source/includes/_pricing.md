@@ -31,7 +31,7 @@
    "numPassengers":1,  
    "numLargeItems":0,  
    "numSmallItems":0,  
-   "vehicleCategoryId":1,  
+   "vehicleCategoryCommonName": "standard_car",  
    "customer":{  
       "firstName":"John",  
       "lastName":"Doe",  

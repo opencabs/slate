@@ -39,16 +39,16 @@ on_account | Account payment, i.e. deferred payment after invoice
 
 ## Vehicle categories
 
-Id  | Code | Pax | Bags-L | Bags-S | Name
+Id  | CoommonName | Pax | Bags-L | Bags-S | Name
 --- | --- | --- | ------ | ------ | ----
-__1__ | standard_car | 4 | 2 | 2 | __Saloon__ (Prius)
-__2__ | estate_car | 4 | 4 | 2 | __Estate__ (Prius+)
-__3__ | small_mpv |5 | 4 | 3 | __Small MPV__ (Zafira)
-__4__ | mpv | 6 | 4 | 3 | __Large MPV__ (Galaxy, 6 pax + hand luggage or 5 pax + bags
-__11__ | small_van | 8 | 2 | 2 | __8 seaters__ (Transporter)
-__6__ | executive_car | 4 | 2 | 2 | __Executive Saloon__ (E-Class)
-__634__ | executive_van | 6 | 6 | 3 | __Executive MPV__ (V-Class)
-__49__ | luxury_car | 3 | 2 | 2 | __Luxury Saloon__ (S-Class)
+1 | __standard_car__ | 4 | 2 | 2 | __Saloon__ (Prius)
+2 | __estate_car__ | 4 | 4 | 2 | __Estate__ (Prius+)
+3 | __small_mpv__ |5 | 4 | 3 | __Small MPV__ (Zafira)
+4 | __mpv__ | 6 | 4 | 3 | __Large MPV__ (Galaxy, 6 pax + hand luggage or 5 pax + bags
+11 | __small_van__ | 8 | 2 | 2 | __8 seaters__ (Transporter)
+6 | __executive_car__ | 4 | 2 | 2 | __Executive Saloon__ (E-Class)
+634 | __executive_van__ | 7 | 6 | 3 | __Executive MPV__ (V-Class)
+49 | __luxury_car__ | 4 | 2 | 2 | __Luxury Saloon__ (S-Class)
 
 ## VehicleOnRoad status
 
