@@ -116,26 +116,26 @@ Parameter | Required | Description
       "statusId":0,
       "clientBookingReference":"12345",
       "origin": {
-        "originPOI":"some poi",
-        "originAddressDetails":"Red building",
-        "originStreetNumber":"262",
-        "originAddress":"Kentish Town Road",
-        "originCity":"Greater London",
-        "originPostcode":"NW5 2AA",
-        "originCountry":"GB",
-        "originLatitude":51.55051,
-        "originLongitude":-0.1407013
+        "POI":"some poi",
+        "addressDetails":"Red building",
+        "streetNumber":"262",
+        "address":"Kentish Town Road",
+        "city":"Greater London",
+        "postcode":"NW5 2AA",
+        "country":"GB",
+        "latitude":51.55051,
+        "longitude":-0.1407013
       },
       "bookingStops":[  
       ],
       "destination": {
-        "destinationPOI":"London Heathrow (Terminal 1)",
-        "destinationAddress":"Croydon Rd",
-        "destinationCity":"Hayes",
-        "destinationPostcode":"UB3 5AP",
-        "destinationCountry":"UK",
-        "destinationLatitude":51.4723,
-        "destinationLongitude":-0.451795
+        "POI":"London Heathrow (Terminal 1)",
+        "address":"Croydon Rd",
+        "city":"Hayes",
+        "postcode":"UB3 5AP",
+        "country":"UK",
+        "latitude":51.4723,
+        "longitude":-0.451795
       },
       "journeyDistance":31.766,
       "numPassengers":1,
