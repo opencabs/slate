@@ -12,28 +12,17 @@
    "clientBookingReference":"12345",
    "journeyTimeMinutes":51,
    "journeyDistance":28.192,
-   "originPOI":"some poi",
-   "originAddressDetails":"York House",  
-   "originStreetNumber":"262",  
-   "originAddress":"Kentish Town Road",  
-   "originCity":"Greater London",  
-   "originPostcode":"NW5 2AA",  
-   "originLatitude":51.55051,  
-   "originLongitude":-0.1407013000000461,  
-   "originCountry":"GB",  
-   "destinationPOI":"London Heathrow (Terminal 1)",  
-   "destinationAddress":"Croydon Rd",  
-   "destinationCity":"Hayes",  
-   "destinationPostcode":"UB3 5AP",  
-   "destinationLatitude":51.4723,  
-   "destinationLongitude":-0.451795,  
-   "destinationCountry":"UK",  
-   "comments":"some notes",  
-   "flightNumber":"AB12345",  
-   "numPassengers":1,  
-   "numLargeItems":0,  
-   "numSmallItems":0,  
-   "vehicleCategoryCommonName": "standard_car",  
+   "origin": {
+     "POI":"some poi",
+     "addressDetails":"York House",  
+     "streetNumber":"262",  
+     "address":"Kentish Town Road",  
+     "city":"Greater London",  
+     "postcode":"NW5 2AA",  
+     "country":"UK",
+     "latitude":51.55051,  
+     "longitude":-0.1407013000000461  
+   },
    "bookingStops": [{
        "index": 0,
        "POI": "",
@@ -41,9 +30,9 @@
        "address": "Woronzow Road",
        "city": "London",
        "postcode": "NW8 6",
+       "country": "UK",
        "latitude": 51.536430,
-       "longitude": -0.168620,
-       "country": "GB"
+       "longitude": -0.168620
      }, {
        "index": 1,
        "POI": "",
@@ -52,10 +41,27 @@
        "address": "Molesford Road",
        "city": "London",
        "postcode": "SW6 4",
-       "latitude": 51.536430,
-       "longitude": -0.168620,
-       "country": "GB"
+       "country": "UK",
+       "latitude": 51.473350,
+       "longitude": -0.197480
    }],   
+   "destination": {
+     "POI":"London Heathrow (Terminal 1)",  
+     "addressDetails":"",
+     "streetNumber":"",  
+     "address":"Croydon Rd",  
+     "city":"Hayes",  
+     "postcode":"UB3 5AP",  
+     "country":"UK",
+     "latitude":51.4723,  
+     "longitude":-0.451795
+   },
+   "comments":"some notes",  
+   "flightNumber":"AB12345",  
+   "numPassengers":1,  
+   "numLargeItems":0,  
+   "numSmallItems":0,  
+   "vehicleCategoryCommonName": "standard_car",  
    "customer":{  
       "firstName":"John",  
       "lastName":"Doe",  
@@ -105,42 +111,43 @@ Parameter | Required | Description
    "quote":{  
       "created":"2015-03-03 12:18:50",
       "fareType":"fixed_point_to_point",
-      "destinationAddress":"Croydon Rd",
       "typeId":38,
       "isAsap":true,
       "statusId":0,
       "clientBookingReference":"12345",
-      "originAddress":"Kentish Town Road",
-      "originCity":"Greater London",
-      "originCountry":"GB",
-      "originPOI":"some poi",
-      "originPostcode":"NW5 2AA",
-      "destinationCity":"Hayes",
-      "destinationCountry":"UK",
-      "destinationPOI":"London Heathrow (Terminal 1)",
-      "destinationPostcode":"UB3 5AP",
-      "destinationLatitude":51.4723,
-      "destinationLongitude":-0.451795,
+      "origin": {
+        "originPOI":"some poi",
+        "originAddressDetails":"Red building",
+        "originStreetNumber":"262",
+        "originAddress":"Kentish Town Road",
+        "originCity":"Greater London",
+        "originPostcode":"NW5 2AA",
+        "originCountry":"GB",
+        "originLatitude":51.55051,
+        "originLongitude":-0.1407013
+      },
+      "bookingStops":[  
+      ],
+      "destination": {
+        "destinationPOI":"London Heathrow (Terminal 1)",
+        "destinationAddress":"Croydon Rd",
+        "destinationCity":"Hayes",
+        "destinationPostcode":"UB3 5AP",
+        "destinationCountry":"UK",
+        "destinationLatitude":51.4723,
+        "destinationLongitude":-0.451795
+      },
       "journeyDistance":31.766,
-      "originLatitude":51.55051,
-      "originLongitude":-0.1407013,
       "numPassengers":1,
       "journeyTimeMinutes":38,
       "comments":"some notes",
       "flightNumber":"AB12345",
-      "originStreetNumber":"262",
-      "originAddressDetails":"12",
       "timezoneOffset":0.0,
-      "price":38.50,
-      "netPrice":32.08,
-      "vat":6.42,
       "numLargeItems":0,
       "numSmallItems":0,
       "totalCustomerPrice":38.50,
       "timeZone":"Europe/London",
-      "date":"2015-03-03 12:28:50",
-      "bookingStops":[  
-      ]
+      "date":"2015-03-03 12:28:50"
    },
    "availablePaymentTypes":[  
       {  
@@ -205,9 +212,9 @@ The response contains the details of the journey with the price, with:
         "address": "Woronzow Road",
         "city": "London",
         "postcode": "NW8 6",
+        "country": "GB",
         "latitude": 51.536430,
-        "longitude": -0.168620,
-        "country": "GB"
+        "longitude": -0.168620
     }, {
         "index": 1,
         "POI": "",
@@ -216,9 +223,9 @@ The response contains the details of the journey with the price, with:
         "address": "Molesford Road",
         "city": "London",
         "postcode": "SW6 4",
+        "country": "GB",
         "latitude": 51.473350,
-        "longitude": -0.197480,
-        "country": "GB"
+        "longitude": -0.197480
     }],
     "destination": {
         "poi": "London City Airport (LCY)",
@@ -252,7 +259,7 @@ With the search API you can get the prices for a given journey and for each avai
 
 ### Request
 
-The JSON request example shows the fields required for the pricing search. 
+The JSON request example shows the fields required for the pricing search.
 
 Please note that this API currently works only for 'fixed_point_to_point' fares (i.e. no metered fares).
 
