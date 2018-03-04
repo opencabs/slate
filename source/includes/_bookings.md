@@ -53,8 +53,7 @@ If you need to post a job without a quote from the system, then please look at t
       "lastName":"Doe",
       "phoneNumberCountryCode":"44",
       "phoneNumber":"12345"
-   },
-   "forceAnonymousCustomer":0
+   }
 }
 ```
 
@@ -333,8 +332,7 @@ Note: you can <u>only</u> post jobs without a quote if your account has been pre
         "phoneNumberCountryCode": "44",
         "phoneNumber": "12345"
     },
-    "createdByUserCode": "",
-    "forceAnonymousCustomer": 0
+    "createdByUserCode": ""
 }
 ```
 
