@@ -22,7 +22,7 @@ If you need to post a job without a quote from the system, then please look at t
    "journeyTimeMinutes":51,
    "journeyDistance":28.192,
    "origin": {
-     "POI":"Hotel of the North",
+     "poi":"Hotel of the North",
      "addressDetails":"12",
      "streetNumber":"262",
      "address":"Kentish Town Road",
@@ -33,7 +33,7 @@ If you need to post a job without a quote from the system, then please look at t
      "country":"GB"
    },
    "destination": {
-     "POI":"London Heathrow (Terminal 1)",
+     "poi":"London Heathrow (Terminal 1)",
      "address":"Croydon Rd",
      "city":"Hayes",
      "postcode":"UB3 5AP",
@@ -95,7 +95,7 @@ Note:
       "showPrice": true,
       "created": "2017-05-11 14:02:19",
       "origin": {
-        "POI":"Hotel of the North",
+        "poi":"Hotel of the North",
         "addressDetails":"12",
         "streetNumber":"262",
         "address":"Kentish Town Road",
@@ -106,7 +106,7 @@ Note:
         "country":"GB"
       },
       "destination": {
-        "POI":"London Heathrow (Terminal 1)",
+        "poi":"London Heathrow (Terminal 1)",
         "address":"Croydon Rd",
         "city":"Hayes",
         "postcode":"UB3 5AP",
@@ -163,7 +163,7 @@ Note:
         "enabled": false
     },
     "origin": {
-      "POI": "St. Thomas' Hospital",
+      "poi": "St. Thomas' Hospital",
       "streetNumber": "",
       "addressDetails": "",
       "address": "Westminster Bridge Road",
@@ -177,7 +177,7 @@ Note:
       "streetNumber": "22",
       "addressDetails": "",
       "address": "Faircross Avenue",
-      "POI": "",
+      "poi": "",
       "city": "Barking",
       "country": "United Kingdom",
       "postcode": "IG11 8RD",
@@ -280,7 +280,7 @@ Note: you can <u>only</u> post jobs without a quote if your account has been pre
     "journeyDistance":28.192,
     "date": "2017-05-18T23:55:00Z",
     "origin": {
-      "POI": "London Heathrow (Terminal 1) (LHR)",
+      "poi": "London Heathrow (Terminal 1) (LHR)",
       "address": "Croydon Rd",
       "city": "Hounslow",
       "postcode": "UB3 5AP",
@@ -290,7 +290,7 @@ Note: you can <u>only</u> post jobs without a quote if your account has been pre
     },
     "bookingStops": [{
         "index": 0,
-        "POI": "",
+        "poi": "",
         "streetNumber": "14",
         "address": "Woronzow Road",
         "city": "London",
@@ -300,7 +300,7 @@ Note: you can <u>only</u> post jobs without a quote if your account has been pre
         "country": "GB"
       }, {
         "index": 1,
-        "POI": "",
+        "poi": "",
         "addressDetails": "",
         "streetNumber": "1",
         "address": "Molesford Road",
@@ -311,7 +311,7 @@ Note: you can <u>only</u> post jobs without a quote if your account has been pre
         "country": "GB"
     }],  
     "destination": {
-      "POI": "",
+      "poi": "",
       "streetNumber": "3",
       "address": "Little Portland Street",
       "city": "Greater London",
@@ -380,7 +380,7 @@ Note:
         "enabled": false
     },
     "origin": {
-      "POI": "London Heathrow (Terminal 1) (LHR)",
+      "poi": "London Heathrow (Terminal 1) (LHR)",
       "address": "Croydon Rd",
       "city": "Hounslow",
       "postcode": "UB3 5AP",
@@ -390,7 +390,7 @@ Note:
     },
     "bookingStops": [{
         "index": 0,
-        "POI": "",
+        "poi": "",
         "streetNumber": "14",
         "address": "Woronzow Road",
         "city": "London",
@@ -400,7 +400,7 @@ Note:
         "country": "GB"
       }, {
         "index": 1,
-        "POI": "",
+        "poi": "",
         "addressDetails": "",
         "streetNumber": "1",
         "address": "Molesford Road",
@@ -411,7 +411,7 @@ Note:
         "country": "GB"
     }],  
     "destination": {
-      "POI": "",
+      "poi": "",
       "streetNumber": "3",
       "address": "Little Portland Street",
       "city": "Greater London",
@@ -519,7 +519,7 @@ HTTP Code   | Description
         "name": "ABC Cabs "
     },
     "origin": {
-      "POI": "St. Thomas' Hospital",
+      "poi": "St. Thomas' Hospital",
       "addressDetails": "Esat Wing",
       "streetNumber": "",
       "address": "Westminster Bridge Road",
@@ -532,7 +532,7 @@ HTTP Code   | Description
     "bookingStops": [
     ],    
     "destination": {
-      "POI": "",
+      "poi": "",
       "addressDetails": "",
       "streetNumber": "92",
       "address": "Hillside Avenue",

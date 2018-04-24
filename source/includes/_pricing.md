@@ -13,7 +13,7 @@
    "journeyTimeMinutes":51,
    "journeyDistance":28.192,
    "origin": {
-     "POI":"some poi",
+     "poi":"some poi",
      "addressDetails":"York House",  
      "streetNumber":"262",  
      "address":"Kentish Town Road",  
@@ -25,7 +25,7 @@
    },
    "bookingStops": [{
        "index": 0,
-       "POI": "",
+       "poi": "",
        "streetNumber": "14",
        "address": "Woronzow Road",
        "city": "London",
@@ -35,7 +35,7 @@
        "longitude": -0.168620
      }, {
        "index": 1,
-       "POI": "",
+       "poi": "",
        "addressDetails": "",
        "streetNumber": "1",
        "address": "Molesford Road",
@@ -46,7 +46,7 @@
        "longitude": -0.197480
    }],   
    "destination": {
-     "POI":"London Heathrow (Terminal 1)",  
+     "poi":"London Heathrow (Terminal 1)",  
      "addressDetails":"",
      "streetNumber":"",  
      "address":"Croydon Rd",  
@@ -116,7 +116,7 @@ Parameter | Required | Description
       "statusId":0,
       "clientBookingReference":"12345",
       "origin": {
-        "POI":"some poi",
+        "poi":"some poi",
         "addressDetails":"Red building",
         "streetNumber":"262",
         "address":"Kentish Town Road",
@@ -129,7 +129,7 @@ Parameter | Required | Description
       "bookingStops":[  
       ],
       "destination": {
-        "POI":"London Heathrow (Terminal 1)",
+        "poi":"London Heathrow (Terminal 1)",
         "address":"Croydon Rd",
         "city":"Hayes",
         "postcode":"UB3 5AP",
@@ -207,7 +207,7 @@ The response contains the details of the journey with the price, with:
     },
     "bookingStops": [{
         "index": 0,
-        "POI": "",
+        "poi": "",
         "streetNumber": "14",
         "address": "Woronzow Road",
         "city": "London",
@@ -217,7 +217,7 @@ The response contains the details of the journey with the price, with:
         "longitude": -0.168620
     }, {
         "index": 1,
-        "POI": "",
+        "poi": "",
         "addressDetails": "",
         "streetNumber": "1",
         "address": "Molesford Road",
@@ -350,7 +350,7 @@ Parameter | Required | Description
     ],
     "journeyDetails": {
         "origin": {
-            "POI": "",
+            "poi": "",
             "addressDetails": "3",
             "streetNumber": "",
             "address": "Little portland street",
@@ -363,7 +363,7 @@ Parameter | Required | Description
         "bookingStops": [
             {
                 "index": 0,
-                "POI": "",
+                "poi": "",
                 "streetNumber": "14",
                 "address": "Woronzow Road",
                 "city": "London",
@@ -374,7 +374,7 @@ Parameter | Required | Description
             },
             {
                 "index": 1,
-                "POI": "",
+                "poi": "",
                 "addressDetails": "",
                 "streetNumber": "1",
                 "address": "Molesford Road",
@@ -386,7 +386,7 @@ Parameter | Required | Description
             }
         ],        
         "destination": {
-            "POI": "London City Airport (LCY)",
+            "poi": "London City Airport (LCY)",
             "addressDetails": "",
             "streetNumber": "",
             "address": "Hartmann Road",
